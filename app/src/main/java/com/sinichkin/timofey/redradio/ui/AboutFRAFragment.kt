@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.sinichkin.timofey.redradio.R
 import kotlinx.android.synthetic.main.fragment_about.view.*
 
-class AboutFragment : Fragment() {
+class AboutFRAFragment : Fragment() {
 
 
 
@@ -19,8 +19,7 @@ class AboutFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root =  inflater.inflate(R.layout.fragment_about, container, false)
-        root.bigTextAbout.text = getString(R.string.lozung)
-
+        root.bigTextAbout.text = getString(R.string.about_fra)
         return  root
     }
 

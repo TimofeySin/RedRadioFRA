@@ -3,39 +3,48 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/home_fon_akustika"
+    android:background="@drawable/fon_wood"
     android:orientation="vertical"
     android:scrollbars="vertical">
 
-    <TextView
-        android:id="@+id/textView3"
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/roboto"
-        android:text="@string/nav_header_title"
-        android:textAlignment="center"
-        android:textColor="@color/textForNav"
-        android:textSize="36sp" />
+        android:layout_height="match_parent"
+        android:layout_weight="3">
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="match_parent"
-        android:layout_height="247dp"
-        android:cropToPadding="true"
-        android:scaleType="fitStart"
-        app:srcCompat="@drawable/big_logo" />
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:paddingTop="30dp"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/rpw_logo" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/roboto"
+            android:text="@string/nav_header_title"
+            android:textAlignment="center"
+            android:textColor="@color/textForNav"
+            android:textSize="36sp" />
+
+    </FrameLayout>
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_weight="1">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView7"
+                android:id="@+id/bigTextAbout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_vertical_margin"

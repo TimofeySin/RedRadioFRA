@@ -122,28 +122,28 @@ class HomeFragment : Fragment() {
         } else {
             //root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
             //root.controlPlayerButton.setPadding(40)
-            val animation: Animation =
-                AnimationUtils.loadAnimation(root.context, R.anim.play_button_scale)
-            animation.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationRepeat(animation: Animation?) {
+//            val animation: Animation =
+//                AnimationUtils.loadAnimation(root.context, R.anim.play_button_scale)
+//            animation.setAnimationListener(object : Animation.AnimationListener {
+//                override fun onAnimationRepeat(animation: Animation?) {
+//
+//                }
+//
+//                override fun onAnimationEnd(animation: Animation?) {
+//                    if (mModelMedia.getMediaDone()) {
+//                        val animation: Animation =
+//                            AnimationUtils.loadAnimation(root.context, R.anim.play_button_transp)
+//                        animation.setAnimationListener(this)
+//                        root.controlPlayerButton.startAnimation(animation)
+//                    } else {
+//                        root.controlPlayerButton.clearAnimation()
+//                    }
+//                }
+//
+//                override fun onAnimationStart(animation: Animation?) {}
+//            })
 
-                }
-
-                override fun onAnimationEnd(animation: Animation?) {
-                    if (mModelMedia.getMediaDone()) {
-                        val animation: Animation =
-                            AnimationUtils.loadAnimation(root.context, R.anim.play_button_scale)
-                        animation.setAnimationListener(this)
-                        root.controlPlayerButton.startAnimation(animation)
-                    } else {
-                        root.controlPlayerButton.clearAnimation()
-                    }
-                }
-
-                override fun onAnimationStart(animation: Animation?) {}
-            })
-
-            root.controlPlayerButton.startAnimation(animation)
+         //   root.controlPlayerButton.startAnimation(animation)
 
         }
     }
@@ -201,24 +201,24 @@ class HomeFragment : Fragment() {
     private fun testAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
         val anim = R.anim.play_button_transp
         val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
-        animation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationRepeat(animation: Animation?) {
-
-            }
-
-            override fun onAnimationEnd(animation: Animation?) {
-                if (mModelMedia.getMediaDone()) {
-                    root.controlPlayerButton.clearAnimation()
-                } else {
-                    val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
-                    animation.setAnimationListener(this)
-                    root.controlPlayerButton.startAnimation(animation)
-
-                }
-            }
-
-            override fun onAnimationStart(animation: Animation?) {}
-        })
+//        animation.setAnimationListener(object : Animation.AnimationListener {
+//            override fun onAnimationRepeat(animation: Animation?) {
+//
+//            }
+//
+//            override fun onAnimationEnd(animation: Animation?) {
+//                if (mModelMedia.getMediaDone()) {
+//                    //root.controlPlayerButton.clearAnimation()
+//                } else {
+//                     //animation = AnimationUtils.loadAnimation(root.context, anim)
+////                    animation!!.setAnimationListener(this)
+////                    root.controlPlayerButton.startAnimation(animation)
+//
+//                }
+//            }
+//
+//            override fun onAnimationStart(animation: Animation?) {}
+//        })
 
         root.controlPlayerButton.startAnimation(animation)
     }

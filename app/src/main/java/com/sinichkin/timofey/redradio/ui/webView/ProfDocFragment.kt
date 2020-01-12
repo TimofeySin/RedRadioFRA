@@ -17,6 +17,11 @@ class ProfDocFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_web_view, container, false)
+
+        root.mainWebView.settings.javaScriptEnabled = true
+        root.mainWebView.settings.allowFileAccess = true
+     //   root.mainWebView.settings.allowContentAccess = true
+
         root.mainWebView.loadUrl(getString(R.string.menu_url_prof_doc))
         return root
     }

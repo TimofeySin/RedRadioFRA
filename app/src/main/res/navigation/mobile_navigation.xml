@@ -17,7 +17,10 @@
         android:id="@+id/nav_about_rpr"
         android:name="com.sinichkin.timofey.redradio.ui.webView.AboutRPRFragment"
         android:label="@string/menu_nav_about_rpr" />
-
+    <fragment
+        android:id="@+id/nav_about_fra"
+        android:name="com.sinichkin.timofey.redradio.ui.AboutFRAFragment"
+        android:label="@string/menu_nav_fra" />
     <fragment
         android:id="@+id/nav_articles_rpr"
         android:name="com.sinichkin.timofey.redradio.ui.webView.ArticlesRPRFragment"
@@ -42,4 +45,8 @@
         android:id="@+id/nav_prof_doc"
         android:name="com.sinichkin.timofey.redradio.ui.webView.ProfDocFragment"
         android:label="@string/menu_nav_prof_doc" />
+    <fragment
+        android:id="@+id/nav_ku"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.ProfDocFragment"
+        android:label="@string/menu_nav_ku" />
 </navigation>

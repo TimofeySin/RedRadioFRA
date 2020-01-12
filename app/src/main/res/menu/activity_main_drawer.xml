@@ -6,41 +6,40 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_home"
-            android:icon="@drawable/ic_menu_share"
             android:title="@string/menu_nav_radio" />
         <item
             android:id="@+id/nav_about"
-            android:icon="@drawable/ic_menu_share"
             android:title="@string/menu_about" />
     </group>
 
 
-        <item android:title="@string/menu_nav_fra">
+        <item android:title="">
             <menu>
                 <item
+                    android:id="@+id/nav_about_fra"
+                    android:title="@string/menu_nav_fra" />
+                <item
                     android:id="@+id/nav_about_rpr"
-                    android:icon="@drawable/ic_menu_manage"
                     android:title="@string/menu_nav_about_rpr" />
                 <item
                     android:id="@+id/nav_articles_rpr"
-                    android:icon="@drawable/ic_menu_share"
                     android:title= "@string/menu_nav_articlesRPR"/>
                 <item
                     android:id="@+id/nav_program_rpr"
-                    android:icon="@drawable/ic_menu_manage"
                     android:title="@string/menu_nav_program_rpr" />
                 <item
                     android:id="@+id/nav_library_fra"
-                    android:icon="@drawable/ic_menu_manage"
                     android:title="@string/menu_nav_library_fra" />
                 <item
+                    android:id="@+id/nav_ku"
+                    android:title="@string/menu_nav_ku" />
+                <item
                     android:id="@+id/nav_rkr"
-                    android:icon="@drawable/ic_menu_manage"
                     android:title="@string/menu_nav_rkr" />
                 <item
                     android:id="@+id/nav_prof_doc"
-                    android:icon="@drawable/ic_menu_manage"
                     android:title="@string/menu_nav_prof_doc" />
+
             </menu>
         </item>
 
