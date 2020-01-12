@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="3"
+        android:background="@drawable/home_fon_akustika">
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="100dp"
+            app:srcCompat="@drawable/rpw_logo" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/roboto"
+                android:padding="@dimen/fab_margin"
+                android:text="@string/nav_header_title"
+                android:textAlignment="center"
+                android:textColor="@color/textForNav"
+                android:textSize="36sp" />
+
+            <ImageView
+                android:id="@+id/controlPlayerButton"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                app:srcCompat="@drawable/ic_play_button" />
+
+            <TextView
+                android:id="@+id/trackInfo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:ellipsize="marquee"
+                android:fontFamily="@font/roboto"
+                android:textAlignment="center"
+                android:singleLine="true"
+                android:textColor="@color/textForNav"
+                android:textSize="24sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="10dp"
+        android:background="@color/borderHome"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="9"
+        android:background="@drawable/fon_wood">
+
+        <ImageView
+            android:id="@+id/imageVolumeButtonShadow"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:srcCompat="@drawable/volume_regulator_shadow" />
+
+        <ImageView
+            android:id="@+id/imageVolumeButton"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:cropToPadding="false"
+            app:srcCompat="@drawable/volume_regulator" />
+
+        <com.sinichkin.timofey.redradio.VolumeButtonView
+            android:id="@+id/controlVolumeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </FrameLayout>
+</LinearLayout>

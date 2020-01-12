@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.sinichkin.timofey.redradio.ui.home.HomeFragment"
+        android:label="@string/menu_nav_radio" />
+
+    <fragment
+        android:id="@+id/nav_about_rkr"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.AboutRKRFragment"
+        android:label="@string/menu_nav_about_rkr"
+        tools:layout="@layout/fragment_web_view"/>
+
+    <fragment
+        android:id="@+id/nav_articles_rpr"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.ArticlesRPRFragment"
+        android:label="@string/menu_nav_articlesRPR"
+        tools:layout="@layout/fragment_web_view"/>
+
+    <fragment
+        android:id="@+id/nav_program_rpr"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.ProgramRPRFragment"
+        android:label="@string/menu_nav_program_rpr"
+        tools:layout="@layout/fragment_web_view" />
+
+    <fragment
+        android:id="@+id/nav_library_fra"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.LibraryFRAFragment"
+        android:label="@string/menu_nav_library_fra"
+        tools:layout="@layout/fragment_web_view" />
+
+    <fragment
+        android:id="@+id/nav_rkr"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.RKRFragment"
+        android:label="@string/menu_nav_rkr"
+        tools:layout="@layout/fragment_web_view" />
+    <fragment
+        android:id="@+id/nav_fra"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.FRAFragment"
+        android:label="@string/menu_nav_fra"
+        tools:layout="@layout/fragment_web_view" />
+</navigation>

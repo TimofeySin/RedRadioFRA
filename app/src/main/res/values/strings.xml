@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">RedRadio</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Красное радио ФРА</string>
+    <string name="nav_header_subtitle">https://www.krasnoe-radio.ru/</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_nav_radio">Радио ФРА</string>
+    <string name="menu_nav_about_rkr">О нас</string>
+    <string name="menu_nav_articlesRPR">Устав РПР</string>
+    <string name="menu_nav_program_rpr">Программа РПР</string>
+    <string name="menu_nav_library_fra">Библиотека ФРА</string>
+    <string name="menu_nav_rkr">РКР</string>
+    <string name="menu_nav_fra">Фонд рабочей академии</string>
+    <string name="menu_share">Поделиться</string>
+
+
+</resources>
