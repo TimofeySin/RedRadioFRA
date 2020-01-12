@@ -2,6 +2,7 @@ package com.sinichkin.timofey.redradio.ui
 
 import android.content.Context
 import android.content.res.Configuration
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
+import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import com.sinichkin.timofey.redradio.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -23,6 +25,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class HomeFragment : Fragment() {
 
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -33,14 +36,10 @@ class HomeFragment : Fragment() {
         changeOrientation(root)
         val mModelMedia = SingltonMediaPlayer
         initVolumeButton(root, mModelMedia)
-        if (isNetworkConnected(root.context)) {
-
-            testAnimation(root, mModelMedia)
+        initPlayButtonAnimation(root, mModelMedia)
+        if (root.context.isConnectedToNetwork()) {
             initControlMediaPlayer(root, mModelMedia)
-
-            val retrofit = initRetrofit()
-            getStatus(root, retrofit)
-
+            getStatus(root, initRetrofit())
         }
         return root
     }
@@ -93,10 +92,7 @@ class HomeFragment : Fragment() {
         controlMediaPlayer(root, mModelMedia)
         mModelMedia.getMediaPlayer().setOnPreparedListener {
             mModelMedia.setMediaDone(true)
-            // controlMediaPlayer(root,mModelMedia)
         }
-
-
         root.controlPlayerButton.setOnClickListener {
             if (mModelMedia.getMediaPlayer().isPlaying) {
                 mModelMedia.getMediaPlayer().pause()
@@ -104,47 +100,18 @@ class HomeFragment : Fragment() {
                 mModelMedia.getMediaPlayer().start()
             }
             controlMediaPlayer(root, mModelMedia)
-
         }
     }
 
     private fun controlMediaPlayer(root: View, mModelMedia: SingltonMediaPlayer) {
-
         if (mModelMedia.getMediaDone()) {
-            //  root.controlPlayerButton.alpha = 1f
             if (mModelMedia.getMediaPlayer().isPlaying) {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_pause_button)
-//              //  root.controlPlayerButton.setPadding(80)
+                      root.controlPlayerButton.setPadding(40)
             } else {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
-//               // root.controlPlayerButton.setPadding(40)
+                  root.controlPlayerButton.setPadding(0)
             }
-        } else {
-            //root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
-            //root.controlPlayerButton.setPadding(40)
-//            val animation: Animation =
-//                AnimationUtils.loadAnimation(root.context, R.anim.play_button_scale)
-//            animation.setAnimationListener(object : Animation.AnimationListener {
-//                override fun onAnimationRepeat(animation: Animation?) {
-//
-//                }
-//
-//                override fun onAnimationEnd(animation: Animation?) {
-//                    if (mModelMedia.getMediaDone()) {
-//                        val animation: Animation =
-//                            AnimationUtils.loadAnimation(root.context, R.anim.play_button_transp)
-//                        animation.setAnimationListener(this)
-//                        root.controlPlayerButton.startAnimation(animation)
-//                    } else {
-//                        root.controlPlayerButton.clearAnimation()
-//                    }
-//                }
-//
-//                override fun onAnimationStart(animation: Animation?) {}
-//            })
-
-         //   root.controlPlayerButton.startAnimation(animation)
-
         }
     }
 
@@ -172,16 +139,13 @@ class HomeFragment : Fragment() {
                         root.trackInfo.text = textString
                     }
                     root.trackInfo.isSelected = true
-
                 }
             }
 
             override fun onFailure(call: Call<DataModelStatus>, t: Throwable) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
         })
-
-
     }
 
     private fun getStatus(root: View, retrofit: Retrofit) {
@@ -198,51 +162,36 @@ class HomeFragment : Fragment() {
         myThread.start()
     }
 
-    private fun testAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
+    private fun initPlayButtonAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
         val anim = R.anim.play_button_transp
         val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
-//        animation.setAnimationListener(object : Animation.AnimationListener {
-//            override fun onAnimationRepeat(animation: Animation?) {
-//
-//            }
-//
-//            override fun onAnimationEnd(animation: Animation?) {
-//                if (mModelMedia.getMediaDone()) {
-//                    //root.controlPlayerButton.clearAnimation()
-//                } else {
-//                     //animation = AnimationUtils.loadAnimation(root.context, anim)
-////                    animation!!.setAnimationListener(this)
-////                    root.controlPlayerButton.startAnimation(animation)
-//
-//                }
-//            }
-//
-//            override fun onAnimationStart(animation: Animation?) {}
-//        })
+        animation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {
+
+            }
+
+            override fun onAnimationEnd(animation: Animation?) {
+                if (mModelMedia.getMediaDone()) {
+                    root.controlPlayerButton.clearAnimation()
+                }
+                else {
+                     //animation = AnimationUtils.loadAnimation(root.context, anim)
+                    animation!!.setAnimationListener(this)
+                    root.controlPlayerButton.startAnimation(animation)
+
+                }
+            }
+
+            override fun onAnimationStart(animation: Animation?) {}
+        })
 
         root.controlPlayerButton.startAnimation(animation)
     }
 
-    private fun isNetworkConnected(context: Context): Boolean {
-//        val cm =
-//            context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-//
-//            if (Build.VERSION.SDK_INT < 23) {
-//                val ni = cm.activeNetworkInfo
-//                if (ni != null) {
-//                    return ni.isConnected && (ni.type == ConnectivityManager.TYPE_WIFI || ni.type == ConnectivityManager.TYPE_MOBILE)
-//                }
-//            } else {
-//                val n = cm.activeNetwork
-//                if (n != null) {
-//                    val nc = cm.getNetworkCapabilities(n)
-//                    return nc.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) || nc.hasTransport(
-//                        NetworkCapabilities.TRANSPORT_WIFI
-//                    )
-//                }
-//            }
-//
-//        return false
-        return true
+
+    private fun Context.isConnectedToNetwork(): Boolean {
+        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+        return connectivityManager?.isDefaultNetworkActive ?: false
     }
+
 }
