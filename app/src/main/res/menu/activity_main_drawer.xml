@@ -8,19 +8,19 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_share"
             android:title="@string/menu_nav_radio" />
-<!--        <item-->
-<!--            android:id="@+id/nav_gallery"-->
-<!--            android:icon="@drawable/ic_menu_manage"-->
-<!--            android:title="@string/menu_fra" />-->
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@drawable/ic_menu_share"
+            android:title="@string/menu_about" />
     </group>
 
 
         <item android:title="@string/menu_nav_fra">
             <menu>
                 <item
-                    android:id="@+id/nav_about_rkr"
+                    android:id="@+id/nav_about_rpr"
                     android:icon="@drawable/ic_menu_manage"
-                    android:title="@string/menu_nav_about_rkr" />
+                    android:title="@string/menu_nav_about_rpr" />
                 <item
                     android:id="@+id/nav_articles_rpr"
                     android:icon="@drawable/ic_menu_share"
@@ -34,9 +34,13 @@
                     android:icon="@drawable/ic_menu_manage"
                     android:title="@string/menu_nav_library_fra" />
                 <item
-                    android:id="@+id/nav_nav_rkr"
+                    android:id="@+id/nav_rkr"
                     android:icon="@drawable/ic_menu_manage"
                     android:title="@string/menu_nav_rkr" />
+                <item
+                    android:id="@+id/nav_prof_doc"
+                    android:icon="@drawable/ic_menu_manage"
+                    android:title="@string/menu_nav_prof_doc" />
             </menu>
         </item>
 

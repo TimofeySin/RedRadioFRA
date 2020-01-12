@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sinichkin.timofey.redradio.R
-import kotlinx.android.synthetic.main.fragment_about_rkr.view.*
+import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 class ProgramRPRFragment : Fragment() {
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -19,7 +17,7 @@ class ProgramRPRFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_web_view, container, false)
-        root.webViewGallery.loadUrl("https://rpw-krd.ru/index.php/o-partii/programma-rpr")
+        root.mainWebView.loadUrl(getString(R.string.menu_url_program_rpr))
         return root
     }
 }

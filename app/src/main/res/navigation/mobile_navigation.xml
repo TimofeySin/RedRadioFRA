@@ -7,41 +7,39 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.sinichkin.timofey.redradio.ui.home.HomeFragment"
+        android:name="com.sinichkin.timofey.redradio.ui.HomeFragment"
         android:label="@string/menu_nav_radio" />
-
     <fragment
-        android:id="@+id/nav_about_rkr"
-        android:name="com.sinichkin.timofey.redradio.ui.webView.AboutRKRFragment"
-        android:label="@string/menu_nav_about_rkr"
-        tools:layout="@layout/fragment_web_view"/>
+        android:id="@+id/nav_about"
+        android:name="com.sinichkin.timofey.redradio.ui.AboutFragment"
+        android:label="@string/menu_about" />
+    <fragment
+        android:id="@+id/nav_about_rpr"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.AboutRPRFragment"
+        android:label="@string/menu_nav_about_rpr" />
 
     <fragment
         android:id="@+id/nav_articles_rpr"
         android:name="com.sinichkin.timofey.redradio.ui.webView.ArticlesRPRFragment"
-        android:label="@string/menu_nav_articlesRPR"
-        tools:layout="@layout/fragment_web_view"/>
+        android:label="@string/menu_nav_articlesRPR" />
 
     <fragment
         android:id="@+id/nav_program_rpr"
         android:name="com.sinichkin.timofey.redradio.ui.webView.ProgramRPRFragment"
-        android:label="@string/menu_nav_program_rpr"
-        tools:layout="@layout/fragment_web_view" />
+        android:label="@string/menu_nav_program_rpr" />
 
     <fragment
         android:id="@+id/nav_library_fra"
         android:name="com.sinichkin.timofey.redradio.ui.webView.LibraryFRAFragment"
-        android:label="@string/menu_nav_library_fra"
-        tools:layout="@layout/fragment_web_view" />
+        android:label="@string/menu_nav_library_fra" />
 
     <fragment
         android:id="@+id/nav_rkr"
         android:name="com.sinichkin.timofey.redradio.ui.webView.RKRFragment"
-        android:label="@string/menu_nav_rkr"
-        tools:layout="@layout/fragment_web_view" />
+        android:label="@string/menu_nav_rkr" />
+
     <fragment
-        android:id="@+id/nav_fra"
-        android:name="com.sinichkin.timofey.redradio.ui.webView.FRAFragment"
-        android:label="@string/menu_nav_fra"
-        tools:layout="@layout/fragment_web_view" />
+        android:id="@+id/nav_prof_doc"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.ProfDocFragment"
+        android:label="@string/menu_nav_prof_doc" />
 </navigation>

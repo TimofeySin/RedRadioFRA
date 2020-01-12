@@ -8,13 +8,23 @@
     <string name="action_settings">Settings</string>
 
     <string name="menu_nav_radio">Радио ФРА</string>
-    <string name="menu_nav_about_rkr">О нас</string>
+
+    <string name="menu_nav_about_rpr">О нас</string>
+    <string name="menu_url_about_rpr">http://www.rpw.ru/rkr/aboutrkr.html</string>
     <string name="menu_nav_articlesRPR">Устав РПР</string>
+    <string name="menu_url_articlesRPR">https://www.r-p-w.ru/ustav.html</string>
     <string name="menu_nav_program_rpr">Программа РПР</string>
+    <string name="menu_url_program_rpr">https://www.r-p-w.ru/programma.html</string>
     <string name="menu_nav_library_fra">Библиотека ФРА</string>
+    <string name="menu_url_library_fra">http://bibl.rpw-mos.ru/</string>
     <string name="menu_nav_rkr">РКР</string>
+    <string name="menu_url_rkr">http://rpw-mos.ru/rossijskij-komitet-rabochix/</string>
+    <string name="menu_nav_prof_doc">Документы по профсоюзу</string>
+    <string name="menu_url_prof_doc">https://yadi.sk/d/8BBmLZdd6CjMoQ</string>
+
+
     <string name="menu_nav_fra">Фонд рабочей академии</string>
     <string name="menu_share">Поделиться</string>
-
-
+    <string name="lozung">Красное Радио Фонда Рабочей Академии (Фонда содействия обучению рабочих) - это интернет радио. Красное Радио создано и действует при поддержке Фонда Рабочей Академии и Рабочей партии России. Целью радио является просвещение трудящихся, помощь в изучении общественных наук, в частности, марксизма-ленинизма в единстве его трех источников и составных частей:диалектического материализма, политической экономии и научного социализма. В самом широком смысле суть наших усилий - в формировании материалистического взгляда на действительность и научной картины мира с целью его преобразования в интересах рабочего класса, трудящихся</string>
+    <string name="menu_about">О приложении</string>
 </resources>

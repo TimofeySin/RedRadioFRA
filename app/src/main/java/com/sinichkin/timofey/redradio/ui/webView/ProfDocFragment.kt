@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.sinichkin.timofey.redradio.R
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
-class LibraryFRAFragment : Fragment() {
+class ProfDocFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -17,7 +17,7 @@ class LibraryFRAFragment : Fragment() {
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_web_view, container, false)
-        root.mainWebView.loadUrl(getString(R.string.menu_url_library_fra))
+        root.mainWebView.loadUrl(getString(R.string.menu_url_prof_doc))
         return root
     }
 }

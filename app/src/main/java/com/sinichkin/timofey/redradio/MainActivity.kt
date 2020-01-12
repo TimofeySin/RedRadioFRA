@@ -1,16 +1,26 @@
 package com.sinichkin.timofey.redradio
 
+
+import android.content.ContentResolver
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
-import androidx.appcompat.app.AppCompatActivity
-import android.view.Menu
 import kotlinx.android.synthetic.main.app_bar_main.*
+
+import java.io.ByteArrayOutputStream
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -19,10 +29,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-
         setSupportActionBar(toolbar)
-
 
         val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
         val navView: NavigationView = findViewById(R.id.nav_view)
@@ -31,7 +38,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_about_rkr, R.id.nav_articles_rpr, R.id.nav_program_rpr, R.id.nav_library_fra, R.id.nav_nav_rkr
+                R.id.nav_home//, R.id.nav_about, R.id.nav_about_rkr, R.id.nav_articles_rpr, R.id.nav_program_rpr, R.id.nav_library_fra, R.id.nav_rkr
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -44,8 +51,45 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.action_share ){
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.type = "text/plain"
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Красное Радио ФРА")
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"Это лучшее радио на свете!")
+
+            val bitmap =
+                BitmapFactory.decodeResource(resources, R.drawable.rpw_logo) // your bitmap
+            val bs = ByteArrayOutputStream()
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs)
+
+            //shareIntent.putExtra("image/*", bs.toByteArray())
+             val pict = R.drawable.home_fon_akustika
+            val imageUri =
+//            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+//                    resources.getResourcePackageName(pict) + '/' +
+//                    resources.getResourceTypeName(pict) + '/' +
+//                    pict.toString())
+
+            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ packageName +"/"+pict)
+
+            shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+            shareIntent.data = imageUri
+           // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+           shareIntent.type = "image/*"
+            //shareIntent.setPackage("com.vkontakte.android");
+
+             startActivity(Intent.createChooser(shareIntent, "Красное Радио")) //
+
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+   // val imageUri: Uri = Uri.parse(pictureFile.getAbsolutePath())
+    // Returns the URI path to the Bitmap displayed in specified ImageView
+
 }

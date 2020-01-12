@@ -6,11 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.sinichkin.timofey.redradio.R
-import kotlinx.android.synthetic.main.fragment_articles_rpr.view.*
+import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 class ArticlesRPRFragment : Fragment() {
-
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -18,8 +16,8 @@ class ArticlesRPRFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_articles_rpr, container, false)
-        root.articlesRPR_xml.loadUrl("https://www.r-p-w.ru/ustav.html")
+        val root = inflater.inflate(R.layout.fragment_web_view, container, false)
+        root.mainWebView.loadUrl(getString(R.string.menu_url_articlesRPR))
         return root
     }
 }
