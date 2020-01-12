@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProviders
 import com.sinichkin.timofey.redradio.R
 import kotlinx.android.synthetic.main.fragment_about.view.*
 

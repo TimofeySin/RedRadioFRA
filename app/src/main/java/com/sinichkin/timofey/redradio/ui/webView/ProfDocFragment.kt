@@ -1,5 +1,6 @@
 package com.sinichkin.timofey.redradio.ui.webView
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 class ProfDocFragment : Fragment() {
 
+    @SuppressLint("SetJavaScriptEnabled")
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

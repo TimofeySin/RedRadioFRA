@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_home">
 
@@ -47,6 +46,6 @@
         android:label="@string/menu_nav_prof_doc" />
     <fragment
         android:id="@+id/nav_ku"
-        android:name="com.sinichkin.timofey.redradio.ui.webView.ProfDocFragment"
+        android:name="com.sinichkin.timofey.redradio.ui.webView.RedUniversityFragment"
         android:label="@string/menu_nav_ku" />
 </navigation>

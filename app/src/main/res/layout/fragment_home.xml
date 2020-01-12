@@ -17,6 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="100dp"
+            android:contentDescription="@string/rpr_logo"
             app:srcCompat="@drawable/rpw_logo" />
 
         <LinearLayout
@@ -41,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="3"
+                android:contentDescription="@string/play_button"
                 app:srcCompat="@drawable/ic_play_button" />
 
             <TextView
@@ -74,6 +76,7 @@
             android:id="@+id/imageVolumeButtonShadow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/volume_button"
             app:srcCompat="@drawable/volume_regulator_shadow" />
 
         <ImageView
@@ -82,6 +85,7 @@
             android:layout_height="match_parent"
             android:cropToPadding="false"
             android:rotation="180"
+            android:contentDescription="@string/volume_button"
             app:srcCompat="@drawable/volume_regulator" />
 
         <com.sinichkin.timofey.redradio.VolumeButtonView

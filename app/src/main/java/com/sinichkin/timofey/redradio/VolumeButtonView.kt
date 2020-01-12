@@ -4,6 +4,9 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.MotionEvent
 import android.view.View
+import kotlin.math.acos
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 class VolumeButtonView(context: Context?, attrs: AttributeSet?) : View(context, attrs)   {
     interface OnSliderMovedListener {
@@ -30,7 +33,7 @@ class VolumeButtonView(context: Context?, attrs: AttributeSet?) : View(context, 
     }
 
     override fun onTouchEvent(ev: MotionEvent?): Boolean {
-
+        this.performClick()
         when (ev!!.action) {
             MotionEvent.ACTION_DOWN -> {
                parent.requestDisallowInterceptTouchEvent(true)
@@ -51,6 +54,8 @@ class VolumeButtonView(context: Context?, attrs: AttributeSet?) : View(context, 
         }
         return true
     }
+
+    // fun  performClick(): Boolean {return super.performClick()}
 
     override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
         // use smaller dimension for calculations (depends on parent size)
@@ -83,13 +88,10 @@ class VolumeButtonView(context: Context?, attrs: AttributeSet?) : View(context, 
     private fun calculateAngle(x: Float, y: Float): Double {
         val distanceX: Int = (x - mCircleCenterX).toInt()
         val distanceY: Int = (mCircleCenterY - y).toInt()
-        val c = Math.sqrt(
-            Math.pow(distanceX.toDouble(), 2.0) + Math.pow(
-                distanceY.toDouble(),
-                2.0
-            )
+        val c = sqrt(
+            distanceX.toDouble().pow(2.0) + distanceY.toDouble().pow(2.0)
         )
-        var localmAngle = Math.acos(distanceX / c)
+        var localmAngle = acos(distanceX / c)
         if (distanceY < 0) {
             localmAngle = -localmAngle
         }
@@ -98,9 +100,9 @@ class VolumeButtonView(context: Context?, attrs: AttributeSet?) : View(context, 
     
     
     // you get the angle from the slider listener
-    fun convertAngleToClock(angle: Float): Float {
-        return ((3f / 4f - angle) % 1)*360f
-    }
+//    fun convertAngleToClock(angle: Float): Float {
+//        return ((3f / 4f - angle) % 1)*360f
+//    }
 
     // use the returned value in the `setPosition(float)` method
     fun convertClockToPosition(clock: Float): Float {

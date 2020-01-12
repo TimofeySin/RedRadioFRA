@@ -1,6 +1,5 @@
 package com.sinichkin.timofey.redradio
 
-import android.media.MediaMetadataRetriever
 import android.media.MediaPlayer
 
 

@@ -1,11 +1,9 @@
 <resources>
     <string name="app_name">RedRadio</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+
     <string name="nav_header_title">Красное радио ФРА</string>
     <string name="nav_header_subtitle">https://www.krasnoe-radio.ru/</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
+
 
     <string name="menu_nav_radio">Красное радио ФРА</string>
 
@@ -37,4 +35,7 @@
     Фондом издаются газеты «Народная правда» (имеет аккредитацию в Государственной Думе Федерального собрания Российской Федерации, Администрации и Законодательном собрании Санкт-Петербурга), «Правда труда» и «За рабочее дело».
    </string>
     <string name="menu_about">О приложении</string>
+    <string name="rpr_logo">Логотип Рабочей партии России</string>
+    <string name="play_button">PLAY</string>
+    <string name="volume_button">VOLUME</string>
 </resources>

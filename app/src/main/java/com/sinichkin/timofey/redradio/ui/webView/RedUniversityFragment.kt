@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import com.sinichkin.timofey.redradio.R
 import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
-class RedUniversFragment : Fragment() {
+class RedUniversityFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
