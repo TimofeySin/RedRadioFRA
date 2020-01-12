@@ -1,16 +1,13 @@
 package com.sinichkin.timofey.redradio.ui.home
 
-import android.animation.ValueAnimator
 import android.content.res.Configuration
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.sinichkin.timofey.redradio.*
@@ -43,12 +40,16 @@ class HomeFragment : Fragment() {
         val retrofit = initRetrofit()
         getStatus(root,retrofit)
 
-
+        val params = root.viewBorder.layoutParams
         val currentOrientation = resources.configuration.orientation
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             root.main_layout.orientation =LinearLayout.HORIZONTAL
+            params.height = ViewGroup.LayoutParams.MATCH_PARENT
+            params.width = 10
         } else {
             root.main_layout.orientation =LinearLayout.VERTICAL
+            params.height = 10
+            params.width = ViewGroup.LayoutParams.MATCH_PARENT
         }
 
 
