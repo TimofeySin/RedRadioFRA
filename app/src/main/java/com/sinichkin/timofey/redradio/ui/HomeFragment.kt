@@ -164,25 +164,18 @@ class HomeFragment : Fragment() {
         val anim = R.anim.play_button_transp
         val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
         animation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationRepeat(animation: Animation?) {
-
-            }
-
+            override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
                 if (mModelMedia.getMediaDone()) {
                     root.controlPlayerButton.clearAnimation()
                 }
                 else {
-                     //animation = AnimationUtils.loadAnimation(root.context, anim)
                     animation!!.setAnimationListener(this)
                     root.controlPlayerButton.startAnimation(animation)
-
                 }
             }
-
             override fun onAnimationStart(animation: Animation?) {}
         })
-
         root.controlPlayerButton.startAnimation(animation)
     }
 
