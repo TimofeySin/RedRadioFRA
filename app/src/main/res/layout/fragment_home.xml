@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/generalTitle"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
@@ -35,7 +35,7 @@
                 android:text="@string/nav_header_title"
                 android:textAlignment="center"
                 android:textColor="@color/textForNav"
-                android:textSize="36sp" />
+                android:textSize="30sp" />
 
             <ImageView
                 android:id="@+id/controlPlayerButton"
@@ -83,9 +83,9 @@
             android:id="@+id/imageVolumeButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:contentDescription="@string/volume_button"
             android:cropToPadding="false"
             android:rotation="180"
-            android:contentDescription="@string/volume_button"
             app:srcCompat="@drawable/volume_regulator" />
 
         <com.sinichkin.timofey.redradio.VolumeButtonView
@@ -93,4 +93,5 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </FrameLayout>
+
 </LinearLayout>

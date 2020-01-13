@@ -1,10 +1,7 @@
 package com.sinichkin.timofey.redradio.ui
 
-import android.content.Context
 import android.content.res.Configuration
-import android.net.ConnectivityManager
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,6 +17,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 
 
 class HomeFragment : Fragment() {
@@ -35,10 +33,10 @@ class HomeFragment : Fragment() {
         val mModelMedia = SingltonMediaPlayer
         initVolumeButton(root, mModelMedia)
         initPlayButtonAnimation(root, mModelMedia)
-        if (root.context.isConnectedToNetwork()) {
-            initControlMediaPlayer(root, mModelMedia)
-            getStatus(root, initRetrofit())
-        }
+
+        initControlMediaPlayer(root, mModelMedia)
+        initUpdateNameOfTrack(1000)
+
         return root
     }
 
@@ -56,34 +54,45 @@ class HomeFragment : Fragment() {
         }
     }
 
+///////// Все связанное со звуком
+//////////////////////////////////////////////
+
     private fun initVolumeButton(root: View, mModelMedia: SingltonMediaPlayer) {
         root.controlVolumeButton.setSecondView(root.imageVolumeButton)
         root.controlVolumeButton.setOnSliderMovedListener(object :
             VolumeButtonView.OnSliderMovedListener {
             override fun onSliderMoved(pos: Double, firstPos: Double, startRotation: Float) {
-
                 val posAngle = root.controlVolumeButton.convertClockToPosition(pos.toFloat())
                 val firstPosAngle =
                     root.controlVolumeButton.convertClockToPosition(firstPos.toFloat())
-                val procent = posAngle * 100f / 360f
-
-
-                var endProcent = roundAngle((startRotation - (firstPosAngle - posAngle)))
-                Log.d("PROCENT","endProcent:$endProcent/Anglein:"+(startRotation - (firstPosAngle - posAngle)))
-                if (endProcent > 180f && root.imageVolumeButton.rotation<180f) {
-                    endProcent = 180f
-                }
-                Log.d("PROCENT","finich:$endProcent / rotation:"+root.imageVolumeButton.rotation)
-                root.imageVolumeButton.rotation = endProcent
-                mModelMedia.getMediaPlayer().setVolume(procent / 100*2f, procent / 100*2f)
-
+                val percent = posAngle * 100f / 360f
+                val endPercent = root.controlVolumeButton.roundAngle(
+                    (startRotation - (firstPosAngle - posAngle)),
+                    root.imageVolumeButton.rotation
+                )
+                root.imageVolumeButton.rotation = endPercent
+                mModelMedia.getMediaPlayer().setVolume(percent / 100 * 2f, percent / 100 * 2f)
             }
         })
     }
 
-    private fun roundAngle(angle: Float): Float {
-        if (angle < 0f || angle > 360f) {return 0f}
-        return angle
+    private fun initPlayButtonAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
+        val anim = R.anim.play_button_transp
+        val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
+        animation.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                if (mModelMedia.getMediaDone()) {
+                    root.controlPlayerButton.clearAnimation()
+                } else {
+                    animation!!.setAnimationListener(this)
+                    root.controlPlayerButton.startAnimation(animation)
+                }
+            }
+
+            override fun onAnimationStart(animation: Animation?) {}
+        })
+        root.controlPlayerButton.startAnimation(animation)
     }
 
     private fun initControlMediaPlayer(root: View, mModelMedia: SingltonMediaPlayer) {
@@ -105,12 +114,30 @@ class HomeFragment : Fragment() {
         if (mModelMedia.getMediaDone()) {
             if (mModelMedia.getMediaPlayer().isPlaying) {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_pause_button)
-                      root.controlPlayerButton.setPadding(40)
+                root.controlPlayerButton.setPadding(40)
             } else {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
-                  root.controlPlayerButton.setPadding(0)
+                root.controlPlayerButton.setPadding(0)
             }
         }
+    }
+
+//////////////////////////////////////////////
+////нижняя строка название трека
+    private fun setNameOfTrack(text: String) {
+        this.view!!.trackInfo.text = text
+        this.view!!.trackInfo.isSelected = true
+    }
+
+    private fun initUpdateNameOfTrack(period:Long){
+        val retrofit = initRetrofit()
+        val timer = Timer()
+        val monitor = object : TimerTask() {
+            override fun run() {
+                getNameOfTrack(retrofit)
+            }
+        }
+        timer.schedule(monitor, 0, period)
     }
 
     private fun initRetrofit(): Retrofit {
@@ -118,11 +145,9 @@ class HomeFragment : Fragment() {
             .baseUrl("https://myradio24.org/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-
     }
 
-    private fun retrofit(root: View, retrofit: Retrofit) {
-
+    private fun getNameOfTrack(retrofit: Retrofit) {
         val service = retrofit.create(RetrofitServer::class.java)
         val call = service.getStatus()
         call.enqueue(object : Callback<DataModelStatus> {
@@ -132,57 +157,19 @@ class HomeFragment : Fragment() {
             ) {
                 if (response.code() == 200) {
                     val wResponse = response.body()
-                    val textString = "     " + wResponse!!.getSong()
-                    if (textString != root.trackInfo.text) {
-                        root.trackInfo.text = textString
-                    }
-                    root.trackInfo.isSelected = true
+                    setNameOfTrack("     " + wResponse!!.getSong())
                 }
             }
 
             override fun onFailure(call: Call<DataModelStatus>, t: Throwable) {
-
+                setNameOfTrack(getString(R.string.error_retrofit))
             }
         })
+
     }
 
-    private fun getStatus(root: View, retrofit: Retrofit) {
-        val myThread = Thread(Runnable {
-            while (true) {
-                retrofit(root, retrofit)
-                try {
-                    Thread.sleep(10000)
-                } catch (e: InterruptedException) {
-                    e.printStackTrace()
-                }
-            }
-        })
-        myThread.start()
-    }
-
-    private fun initPlayButtonAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
-        val anim = R.anim.play_button_transp
-        val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
-        animation.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationRepeat(animation: Animation?) {}
-            override fun onAnimationEnd(animation: Animation?) {
-                if (mModelMedia.getMediaDone()) {
-                    root.controlPlayerButton.clearAnimation()
-                }
-                else {
-                    animation!!.setAnimationListener(this)
-                    root.controlPlayerButton.startAnimation(animation)
-                }
-            }
-            override fun onAnimationStart(animation: Animation?) {}
-        })
-        root.controlPlayerButton.startAnimation(animation)
-    }
+//////////////////////////////////////////////
 
 
-    private fun Context.isConnectedToNetwork(): Boolean {
-        val connectivityManager = this.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
-        return connectivityManager?.isDefaultNetworkActive ?: false
-    }
 
 }

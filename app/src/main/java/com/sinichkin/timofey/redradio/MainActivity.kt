@@ -64,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs)
 
             //shareIntent.putExtra("image/*", bs.toByteArray())
-             val pict = R.drawable.home_fon_akustika
+            val pict = R.drawable.home_fon_akustika
             val imageUri =
 //            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
 //                    resources.getResourcePackageName(pict) + '/' +
@@ -91,5 +91,6 @@ class MainActivity : AppCompatActivity() {
     }
    // val imageUri: Uri = Uri.parse(pictureFile.getAbsolutePath())
     // Returns the URI path to the Bitmap displayed in specified ImageView
+
 
 }

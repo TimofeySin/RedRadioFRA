@@ -24,7 +24,7 @@ class VolumeButtonView(context: Context?, attrs: AttributeSet?) : View(context, 
     private var firstRot = 0f
     private var secondView:View? = null
 
-    fun setSecondView(view:View){
+    fun setSecondView(view:View?){
         secondView = view
     }
 
@@ -109,6 +109,21 @@ class VolumeButtonView(context: Context?, attrs: AttributeSet?) : View(context, 
         return (1f - (3f / 4f + clock) % 1)*360f
     }
 
+    fun roundAngle(a: Float, oldAngle: Float): Float {
+        var angle = a
+        while (angle >= 360f) angle -= 360f
+
+        while (angle < 0f) angle += 360f
+
+        if (a <= 0f || a >= 180f) {
+            angle = if (oldAngle <= 90) {
+                0f
+            } else {
+                180f
+            }
+        }
+        return angle
+    }
 
 
 }

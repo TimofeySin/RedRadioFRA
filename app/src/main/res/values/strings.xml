@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">RedRadio</string>
 
-    <string name="nav_header_title">Красное радио ФРА</string>
-    <string name="nav_header_subtitle">https://www.krasnoe-radio.ru/</string>
-
+    <string name="nav_header_title">Красное радио \nФонда Рабочей Академии</string>
+    <string name="nav_header_subtitle">https://www.krasnoe-radio.ru</string>
+    <string name="error_retrofit">Не удалось подключиться к серверу. Проверьте включен ли интернет</string>
 
     <string name="menu_nav_radio">Красное радио ФРА</string>
 
