@@ -7,32 +7,34 @@
     android:orientation="vertical"
     android:scrollbars="vertical">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/rpr_logo"
-            android:paddingTop="30dp"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/rpw_logo" />
+        android:layout_weight="3"
+        android:orientation="vertical">
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/titleTextAbout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="2"
             android:fontFamily="@font/roboto"
             android:text="@string/nav_header_title"
             android:textAlignment="center"
             android:textColor="@color/textForNav"
-            android:textSize="36sp" />
+            app:autoSizeTextType="uniform" />
 
-    </FrameLayout>
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:contentDescription="@string/rpr_logo"
+            android:scaleType="fitStart"
+            app:srcCompat="@drawable/header_for_about" />
+
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -51,7 +53,8 @@
                 android:padding="@dimen/activity_vertical_margin"
                 android:text="@string/lozung"
                 android:textAlignment="viewStart"
-                android:textColor="@color/textForNav" />
+                android:textColor="@color/textForNav"
+                />
         </LinearLayout>
     </ScrollView>
 

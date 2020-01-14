@@ -18,6 +18,7 @@ class AboutFRAFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val root =  inflater.inflate(R.layout.fragment_about, container, false)
+        root.titleTextAbout.text = getString(R.string.menu_nav_fra)
         root.bigTextAbout.text = getString(R.string.about_fra)
         return  root
     }

@@ -5,4 +5,5 @@
     <color name="navigationIconColor">#a72410</color>
     <color name="borderHome">#550000</color>
     <color name="textForNav">#FCFAD0</color>
+    <color name="textForMenu">#8A0B10</color>
     </resources>

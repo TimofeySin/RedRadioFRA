@@ -2,6 +2,8 @@ package com.sinichkin.timofey.redradio.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +23,8 @@ import java.util.*
 
 
 class HomeFragment : Fragment() {
+private val periodUpdateRunText :Long = 1000
+private var errorCount = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -35,7 +39,8 @@ class HomeFragment : Fragment() {
         initPlayButtonAnimation(root, mModelMedia)
 
         initControlMediaPlayer(root, mModelMedia)
-        initUpdateNameOfTrack(1000)
+        initUpdateNameOfTrack(periodUpdateRunText)
+        //initUpdateNameOfTrack(periodUpdateRunText)
 
         return root
     }
@@ -61,16 +66,20 @@ class HomeFragment : Fragment() {
         root.controlVolumeButton.setSecondView(root.imageVolumeButton)
         root.controlVolumeButton.setOnSliderMovedListener(object :
             VolumeButtonView.OnSliderMovedListener {
-            override fun onSliderMoved(pos: Double, firstPos: Double, startRotation: Float) {
+
+            override fun onSliderMoved(pos: Double, firstPos: Double, startRotation: Float, clock:Int,quarter: Int) {
                 val posAngle = root.controlVolumeButton.convertClockToPosition(pos.toFloat())
                 val firstPosAngle =
                     root.controlVolumeButton.convertClockToPosition(firstPos.toFloat())
                 val percent = posAngle * 100f / 360f
                 val endPercent = root.controlVolumeButton.roundAngle(
                     (startRotation - (firstPosAngle - posAngle)),
-                    root.imageVolumeButton.rotation
-                )
-                root.imageVolumeButton.rotation = endPercent
+                    root.imageVolumeButton.rotation,clock,quarter
+                )//startRotation:$startRotation|firstPosAngle:$firstPosAngle|
+                Log.d("INB","HOME:   pos  :$pos|posAngle:$posAngle|endPercent:$endPercent|rotation:"+root.imageVolumeButton.rotation.toString()+"|sum:"+(startRotation - (firstPosAngle - posAngle)).toString())
+               if(clock==2) {
+                   root.imageVolumeButton.rotation += pos.toFloat()//endPercent
+               } else {root.imageVolumeButton.rotation -= pos.toFloat()}
                 mModelMedia.getMediaPlayer().setVolume(percent / 100 * 2f, percent / 100 * 2f)
             }
         })
@@ -125,20 +134,53 @@ class HomeFragment : Fragment() {
 //////////////////////////////////////////////
 ////нижняя строка название трека
     private fun setNameOfTrack(text: String) {
-        this.view!!.trackInfo.text = text
-        this.view!!.trackInfo.isSelected = true
+    this.view?.let {
+        if (text != it.trackInfo.text)      {
+            it.trackInfo.text = text
+            it.trackInfo.isSelected = true
+        }
+    }
+}
+
+//    private fun initUpdateNameOfTrack(period:Long){
+//        val retrofit = initRetrofit()
+//        val timer = Timer()
+//        val monitor = object : TimerTask() {
+//            override fun run() {
+//                getNameOfTrack(retrofit)
+//                if (errorCount>2)
+//                {    timer.cancel()}
+//            }
+//        }
+//        timer.schedule(monitor, 0, period)
+//    }
+//
+    private fun initUpdateNameOfTrack(period:Long) {
+        val retrofit = initRetrofit()
+        val myThread = Thread(Runnable {
+            while (true) {
+                getNameOfTrack(retrofit)
+                try {
+                    Thread.sleep(period)
+                } catch (e: InterruptedException) {
+                    e.printStackTrace()
+                }
+            }
+        })
+        myThread.start()
     }
 
-    private fun initUpdateNameOfTrack(period:Long){
-        val retrofit = initRetrofit()
-        val timer = Timer()
-        val monitor = object : TimerTask() {
-            override fun run() {
-                getNameOfTrack(retrofit)
-            }
-        }
-        timer.schedule(monitor, 0, period)
-    }
+//    private fun getStatusRunnable(period: Long){
+//        val retrofit = initRetrofit()
+//        val handler =  Handler()
+//        object : Runnable {
+//            override fun run() {
+//                handler.postDelayed(this, period*10) // here is self calling            }
+//                getNameOfTrack(retrofit)
+//        }
+//
+//    }
+//    }
 
     private fun initRetrofit(): Retrofit {
         return Retrofit.Builder()
@@ -160,16 +202,13 @@ class HomeFragment : Fragment() {
                     setNameOfTrack("     " + wResponse!!.getSong())
                 }
             }
-
             override fun onFailure(call: Call<DataModelStatus>, t: Throwable) {
-                setNameOfTrack(getString(R.string.error_retrofit))
+                errorCount++
+                setNameOfTrack(t.message.toString())   ///+
             }
         })
-
     }
 
 //////////////////////////////////////////////
-
-
 
 }

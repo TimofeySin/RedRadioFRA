@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,15 +10,15 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3"
+        android:layout_weight="12"
         android:background="@drawable/home_fon_akustika">
 
         <ImageView
             android:id="@+id/imageView5"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="100dp"
             android:contentDescription="@string/rpr_logo"
+            android:paddingTop="100dp"
             app:srcCompat="@drawable/rpw_logo" />
 
         <LinearLayout
@@ -57,6 +58,7 @@
                 android:textAlignment="center"
                 android:textColor="@color/textForNav"
                 android:textSize="24sp" />
+
         </LinearLayout>
     </FrameLayout>
 
@@ -67,31 +69,73 @@
         android:background="@color/borderHome" />
 
     <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="9"
-        android:background="@drawable/fon_wood">
+        android:background="@drawable/ic_background_nav_menu"
+      >
 
         <ImageView
             android:id="@+id/imageVolumeButtonShadow"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:contentDescription="@string/volume_button"
-            app:srcCompat="@drawable/volume_regulator_shadow" />
+            app:srcCompat="@drawable/volume_regulator_shadow"
+            tools:visibility="visible" />
 
-        <ImageView
-            android:id="@+id/imageVolumeButton"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/volume_button"
-            android:cropToPadding="false"
-            android:rotation="180"
-            app:srcCompat="@drawable/volume_regulator" />
+            >
+
+            <TextView
+                android:id="@+id/maxVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="@string/max_volume"
+                android:textColor="@color/textForNav"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageVolumeButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/minVolume"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="-30dp"
+                android:fontFamily="@font/roboto"
+                android:text="@string/min_volume"
+                android:textColor="@color/textForNav"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageVolumeButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageVolumeButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/volume_button"
+                android:cropToPadding="false"
+                android:rotation="180"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/volume_regulator" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.sinichkin.timofey.redradio.VolumeButtonView
             android:id="@+id/controlVolumeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/volume_button"
+            app:srcCompat="@drawable/volume_regulator_shadow" />
+
     </FrameLayout>
 
 </LinearLayout>
