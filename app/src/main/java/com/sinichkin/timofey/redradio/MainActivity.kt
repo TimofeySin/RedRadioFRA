@@ -56,28 +56,28 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Красное Радио ФРА")
-            shareIntent.putExtra(Intent.EXTRA_TEXT,"Это лучшее радио на свете!")
+            shareIntent.putExtra(Intent.EXTRA_TEXT,"Расскажи товарищам! [тут будет ссылка]")
 
-            val bitmap =
-                BitmapFactory.decodeResource(resources, R.drawable.rpw_logo) // your bitmap
-            val bs = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs)
-
-            //shareIntent.putExtra("image/*", bs.toByteArray())
-            val pict = R.drawable.home_fon_akustika
-            val imageUri =
-//            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
-//                    resources.getResourcePackageName(pict) + '/' +
-//                    resources.getResourceTypeName(pict) + '/' +
-//                    pict.toString())
-
-            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ packageName +"/"+pict)
-
-            shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            shareIntent.data = imageUri
-           // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
-           shareIntent.type = "image/*"
-            //shareIntent.setPackage("com.vkontakte.android");
+//            val bitmap =
+//                BitmapFactory.decodeResource(resources, R.drawable.rpw_logo) // your bitmap
+//            val bs = ByteArrayOutputStream()
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs)
+//
+//            //shareIntent.putExtra("image/*", bs.toByteArray())
+//            val pict = R.drawable.home_fon_akustika
+//            val imageUri =
+////            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
+////                    resources.getResourcePackageName(pict) + '/' +
+////                    resources.getResourceTypeName(pict) + '/' +
+////                    pict.toString())
+//
+//            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ packageName +"/"+pict)
+//
+//            shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
+//            shareIntent.data = imageUri
+//           // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
+//           shareIntent.type = "image/*"
+//            //shareIntent.setPackage("com.vkontakte.android");
 
              startActivity(Intent.createChooser(shareIntent, "Красное Радио")) //
 

@@ -1,38 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AppTheme.AboutFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fon_wood"
+    android:background="@drawable/fon_about"
     android:orientation="vertical"
     android:scrollbars="vertical">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_weight="3">
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:adjustViewBounds="true"
-            android:contentDescription="@string/rpr_logo"
-            android:paddingTop="30dp"
-            android:scaleType="fitStart"
-            app:srcCompat="@drawable/rpw_logo" />
+        android:layout_weight="6"
+        android:orientation="vertical"
+        style="@style/AppTheme.AboutFragment"
+        android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/textView3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:fontFamily="@font/roboto"
-            android:text="@string/nav_header_title"
+            android:text="@string/menu_nav_red_radio"
             android:textAlignment="center"
-            android:textColor="@color/textForNav"
-            android:textSize="36sp" />
+            app:autoSizeTextType="uniform"
+            style="@style/AppTheme.AboutFragment"/>
 
-    </FrameLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/roboto"
+            android:text="@string/menu_nav_fra"
+            android:textAlignment="center"
+            app:autoSizeTextType="uniform"
+            style="@style/AppTheme.AboutFragment"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="@dimen/fab_margin"
+        android:paddingEnd="@dimen/fab_margin">
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/textForNav" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -46,13 +66,220 @@
 
             <TextView
                 android:id="@+id/bigTextAbout"
+                style="@style/AppTheme.AboutFragment"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:autoLink="web"
+                android:background="@color/textFonAbout"
+                android:fontFamily="@font/roboto"
                 android:padding="@dimen/activity_vertical_margin"
-                android:text="@string/lozung"
+                android:text="@string/header_for_about"
                 android:textAlignment="viewStart"
-                android:textColor="@color/textForNav" />
+                android:textSize="12sp" />
+
+            <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="6">
+
+                <TextView
+                    android:id="@+id/TextView5"
+                    style="@style/AppTheme.AboutFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/textFonAbout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:text="@string/about_contact"
+                    android:textAlignment="center" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/bigTextAbout2"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:autoLink="web"
+
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/header_for_about_link1"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/bigTextAbout3"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:autoLink="web"
+                        android:background="@color/textFonAbout"
+
+                        android:fontFamily="@font/roboto"
+                        android:text="@string/header_for_about_link2"
+                        android:textAlignment="center"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/TextView6"
+                    style="@style/AppTheme.AboutFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:background="@color/textFonAbout"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:text="@string/about_responsible"
+                    android:textAlignment="center" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/bigTextAbout16"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:autoLink="web"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_idea_title"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/bigTextAbout17"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:autoLink="web|email"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_idea_name"
+                        android:textAlignment="viewStart" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/bigTextAbout4"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:autoLink="web"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_programmer_title"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/bigTextAbout5"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:autoLink="web|email"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_programmer_name"
+                        android:textAlignment="viewStart" />
+
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/bigTextAbout12"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:autoLink="web"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_designer_title"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/bigTextAbout13"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:autoLink="web|email"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_designer_name"
+                        android:textAlignment="viewStart" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <TextView
+                        android:id="@+id/bigTextAbout18"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="4"
+                        android:autoLink="web"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_art_title"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        android:id="@+id/bigTextAbout19"
+                        style="@style/AppTheme.AboutFragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:autoLink="web|email"
+                        android:background="@color/textFonAbout"
+                        android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/about_art_name"
+                        android:textAlignment="viewStart" />
+                </TableRow>
+            </TableLayout>
+
+
         </LinearLayout>
     </ScrollView>
+
 
 </LinearLayout>

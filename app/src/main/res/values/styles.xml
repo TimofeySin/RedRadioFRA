@@ -15,8 +15,12 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorSecondary">@color/navigationIconColor</item>
-    </style>
 
+    </style>
+    <style name="AppTheme.AboutFragment" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColor">@color/textForNav</item>
+        <item name="android:textColorLink">@color/textForNav</item>
+    </style>
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
 
         <!-- navigation icon color -->

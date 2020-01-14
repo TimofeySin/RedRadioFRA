@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
+import androidx.annotation.Dimension
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
 import com.sinichkin.timofey.redradio.*
@@ -31,7 +32,7 @@ class HomeFragment : Fragment() {
 
         changeOrientation(root)
         val mModelMedia = SingltonMediaPlayer
-        initVolumeButton(root, mModelMedia)
+       // initVolumeButton(root, mModelMedia)
         initPlayButtonAnimation(root, mModelMedia)
 
         initControlMediaPlayer(root, mModelMedia)
@@ -57,24 +58,24 @@ class HomeFragment : Fragment() {
 ///////// Все связанное со звуком
 //////////////////////////////////////////////
 
-    private fun initVolumeButton(root: View, mModelMedia: SingltonMediaPlayer) {
-        root.controlVolumeButton.setSecondView(root.imageVolumeButton)
-        root.controlVolumeButton.setOnSliderMovedListener(object :
-            VolumeButtonView.OnSliderMovedListener {
-            override fun onSliderMoved(pos: Double, firstPos: Double, startRotation: Float) {
-                val posAngle = root.controlVolumeButton.convertClockToPosition(pos.toFloat())
-                val firstPosAngle =
-                    root.controlVolumeButton.convertClockToPosition(firstPos.toFloat())
-                val percent = posAngle * 100f / 360f
-                val endPercent = root.controlVolumeButton.roundAngle(
-                    (startRotation - (firstPosAngle - posAngle)),
-                    root.imageVolumeButton.rotation
-                )
-                root.imageVolumeButton.rotation = endPercent
-                mModelMedia.getMediaPlayer().setVolume(percent / 100 * 2f, percent / 100 * 2f)
-            }
-        })
-    }
+//    private fun initVolumeButton(root: View, mModelMedia: SingltonMediaPlayer) {
+//        root.controlVolumeButton.setSecondView(root.imageVolumeButton)
+//        root.controlVolumeButton.setOnSliderMovedListener(object :
+//            VolumeButtonView.OnSliderMovedListener {
+//            override fun onSliderMoved(pos: Double, firstPos: Double, startRotation: Float) {
+//                val posAngle = root.controlVolumeButton.convertClockToPosition(pos.toFloat())
+//                val firstPosAngle =
+//                    root.controlVolumeButton.convertClockToPosition(firstPos.toFloat())
+//                val percent = posAngle * 100f / 360f
+//                val endPercent = root.controlVolumeButton.roundAngle(
+//                    (startRotation - (firstPosAngle - posAngle)),
+//                    root.imageVolumeButton.rotation
+//                )
+//                root.imageVolumeButton.rotation = endPercent
+//                mModelMedia.getMediaPlayer().setVolume(percent / 100 * 2f, percent / 100 * 2f)
+//            }
+//        })
+//    }
 
     private fun initPlayButtonAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
         val anim = R.anim.play_button_transp
@@ -114,20 +115,27 @@ class HomeFragment : Fragment() {
         if (mModelMedia.getMediaDone()) {
             if (mModelMedia.getMediaPlayer().isPlaying) {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_pause_button)
-                root.controlPlayerButton.setPadding(40)
+                root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt()+15)
+                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt()-1)
             } else {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
-                root.controlPlayerButton.setPadding(0)
+                root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt())
+                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt()-16)
             }
         }
     }
 
 //////////////////////////////////////////////
 ////нижняя строка название трека
-    private fun setNameOfTrack(text: String) {
-        this.view!!.trackInfo.text = text
-        this.view!!.trackInfo.isSelected = true
+private fun setNameOfTrack(text: String) {
+    this.view?.let {
+        if (text != it.trackInfo.text)      {
+            it.trackInfo.text = text
+            it.trackInfo.isSelected = true
+        }
     }
+}
+
 
     private fun initUpdateNameOfTrack(period:Long){
         val retrofit = initRetrofit()

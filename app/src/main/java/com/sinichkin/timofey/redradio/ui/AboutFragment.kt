@@ -17,10 +17,12 @@ class AboutFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root =  inflater.inflate(R.layout.fragment_about, container, false)
-        root.bigTextAbout.text = getString(R.string.lozung)
+       // val root =
+            return inflater.inflate(R.layout.fragment_about, container, false)
 
-        return  root
+
+
+      //  return  root
     }
 
 }
