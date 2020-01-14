@@ -406,7 +406,7 @@ Log.d("ALFFF","aLength:$aLength|bLength:$bLength|cLength:$cLength|alfa:$alfa|mCi
 //                angle = 180f
 //            }
 //            else if (oldAngle == 0f && a !in 180f..360f){
-//                angle = 0f
+//                angle = 0fЯ котлин
 //            }else if (oldAngle == 180f && a !in 160f..180f){
 //                angle = 180f
 //            }
