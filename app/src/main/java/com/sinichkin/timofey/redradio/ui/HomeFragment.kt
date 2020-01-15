@@ -8,10 +8,13 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import androidx.annotation.Dimension
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
-import com.sinichkin.timofey.redradio.*
+import com.sinichkin.timofey.redradio.DataModelStatus
+import com.sinichkin.timofey.redradio.R
+import com.sinichkin.timofey.redradio.RetrofitServer
+import com.sinichkin.timofey.redradio.SingltonMediaPlayer
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -77,6 +80,28 @@ class HomeFragment : Fragment() {
 //        })
 //    }
 
+    private fun initChangeLogo(root: View){
+
+        val animUP = R.anim.play_button_transp_up
+        val animDown = R.anim.play_button_transp_down
+        val animationUP: Animation = AnimationUtils.loadAnimation(root.context, animUP)
+        val animationDown: Animation = AnimationUtils.loadAnimation(root.context, animDown)
+        root.imageLogoFonHome.startAnimation(animationDown)
+
+
+        animationDown.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationRepeat(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                root.imageLogoFonHome.setImageDrawable(getDrawable(root.context,R.drawable.rpw_logo))
+                root.imageLogoFonHome.startAnimation(animationUP)
+            }
+            override fun onAnimationStart(animation: Animation?) {}
+        })
+
+        root.controlPlayerButton.startAnimation(animationDown)
+    }
+
+
     private fun initPlayButtonAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
         val anim = R.anim.play_button_transp
         val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
@@ -100,6 +125,7 @@ class HomeFragment : Fragment() {
         controlMediaPlayer(root, mModelMedia)
         mModelMedia.getMediaPlayer().setOnPreparedListener {
             mModelMedia.setMediaDone(true)
+            initChangeLogo(root)
         }
         root.controlPlayerButton.setOnClickListener {
             if (mModelMedia.getMediaPlayer().isPlaying) {

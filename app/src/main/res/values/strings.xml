@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RedRadio</string>
+    <string name="app_name">Красное радио</string>
 
     <string name="nav_header_title">Красное радио \nФонда Рабочей Академии</string>
     <string name="nav_header_subtitle">https://www.krasnoe-radio.ru</string>
@@ -51,7 +51,7 @@
     <string name="about_designer_name">Кошкина Полина\n https://vk.com/ozzenka</string>
     <string name="about_designer_cont">https://vk.com/ozzenka</string>
 
-    <string name="about_idea_title">Идея:</string>
+    <string name="about_idea_title">Главный редактор:</string>
     <string name="about_idea_name">Гомелаури Пётр\n https://vk.com/dedshykar</string>
     <string name="about_idea_cont">https://vk.com/dedshykar</string>
 

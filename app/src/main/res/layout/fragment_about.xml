@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/AppTheme.AboutFragment"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fon_about"
+    android:background="@color/darkRedMenu"
     android:orientation="vertical"
     android:scrollbars="vertical">
 
     <LinearLayout
+        style="@style/AppTheme.AboutFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="6"
         android:orientation="vertical"
-        style="@style/AppTheme.AboutFragment"
         android:padding="@dimen/activity_horizontal_margin">
 
         <TextView
             android:id="@+id/textView3"
+            style="@style/AppTheme.AboutFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:text="@string/menu_nav_red_radio"
-            android:textAlignment="center"
-            app:autoSizeTextType="uniform"
-            style="@style/AppTheme.AboutFragment"/>
+            android:textAlignment="viewStart"
+            app:autoSizeTextType="uniform" />
 
         <TextView
             android:id="@+id/textView2"
+            style="@style/AppTheme.AboutFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:fontFamily="@font/roboto"
             android:text="@string/menu_nav_fra"
-            android:textAlignment="center"
-            app:autoSizeTextType="uniform"
-            style="@style/AppTheme.AboutFragment"/>
+            android:textAlignment="viewStart"
+            app:autoSizeTextType="uniform" />
 
     </LinearLayout>
 
@@ -70,8 +70,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:autoLink="web"
-                android:background="@color/textFonAbout"
                 android:fontFamily="@font/roboto"
+                android:lineSpacingExtra="8sp"
                 android:padding="@dimen/activity_vertical_margin"
                 android:text="@string/header_for_about"
                 android:textAlignment="viewStart"
@@ -79,7 +79,7 @@
 
             <TableLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="0dp"
                 android:layout_weight="6">
 
                 <TextView
@@ -87,7 +87,6 @@
                     style="@style/AppTheme.AboutFragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/textFonAbout"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/activity_horizontal_margin"
                     android:text="@string/about_contact"
@@ -100,13 +99,14 @@
                     <TextView
                         android:id="@+id/bigTextAbout2"
                         style="@style/AppTheme.AboutFragment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:autoLink="web"
 
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
+                        android:paddingStart="@dimen/activity_horizontal_margin"
+                        android:paddingEnd="0dp"
                         android:text="@string/header_for_about_link1"
                         android:textAlignment="center"
                         android:textSize="12sp"
@@ -115,11 +115,10 @@
                     <TextView
                         android:id="@+id/bigTextAbout3"
                         style="@style/AppTheme.AboutFragment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:autoLink="web"
-                        android:background="@color/textFonAbout"
 
                         android:fontFamily="@font/roboto"
                         android:text="@string/header_for_about_link2"
@@ -134,7 +133,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:autoLink="web"
-                    android:background="@color/textFonAbout"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/activity_horizontal_margin"
                     android:text="@string/about_responsible"
@@ -150,14 +148,13 @@
                         style="@style/AppTheme.AboutFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="4"
+                        android:layout_weight="1"
                         android:autoLink="web"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/about_idea_title"
-                        android:textAlignment="center" />
+                        android:textAlignment="textStart" />
 
                     <TextView
                         android:id="@+id/bigTextAbout17"
@@ -166,7 +163,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:autoLink="web|email"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -183,14 +179,13 @@
                         style="@style/AppTheme.AboutFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="4"
+                        android:layout_weight="1"
                         android:autoLink="web"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/about_programmer_title"
-                        android:textAlignment="center" />
+                        android:textAlignment="textStart" />
 
                     <TextView
                         android:id="@+id/bigTextAbout5"
@@ -199,7 +194,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:autoLink="web|email"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -218,14 +212,13 @@
                         style="@style/AppTheme.AboutFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="4"
+                        android:layout_weight="1"
                         android:autoLink="web"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/about_designer_title"
-                        android:textAlignment="center" />
+                        android:textAlignment="textStart" />
 
                     <TextView
                         android:id="@+id/bigTextAbout13"
@@ -234,7 +227,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:autoLink="web|email"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
@@ -252,14 +244,13 @@
                         style="@style/AppTheme.AboutFragment"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="4"
+                        android:layout_weight="1"
                         android:autoLink="web"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/about_art_title"
-                        android:textAlignment="center" />
+                        android:textAlignment="textStart" />
 
                     <TextView
                         android:id="@+id/bigTextAbout19"
@@ -268,7 +259,6 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1"
                         android:autoLink="web|email"
-                        android:background="@color/textFonAbout"
                         android:fontFamily="@font/roboto"
                         android:paddingStart="@dimen/activity_horizontal_margin"
                         android:paddingEnd="@dimen/activity_horizontal_margin"

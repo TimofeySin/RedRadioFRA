@@ -16,7 +16,8 @@
         android:theme="@style/AppTheme">
         <meta-data
             android:name="com.google.android.actions"
-            android:resource="@anim/play_button_scale" />
+            android:resource="@anim/play_button_transp"
+ />
 
         <activity
             android:name=".MainActivity"
