@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home//, R.id.nav_about, R.id.nav_about_rkr, R.id.nav_articles_rpr, R.id.nav_program_rpr, R.id.nav_library_fra, R.id.nav_rkr
+                R.id.nav_home
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -51,28 +51,6 @@ class MainActivity : AppCompatActivity() {
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Красное Радио ФРА")
             shareIntent.putExtra(Intent.EXTRA_TEXT,"Расскажи товарищам! [тут будет ссылка]")
-
-//            val bitmap =
-//                BitmapFactory.decodeResource(resources, R.drawable.rpw_logo) // your bitmap
-//            val bs = ByteArrayOutputStream()
-//            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs)
-//
-//            //shareIntent.putExtra("image/*", bs.toByteArray())
-//            val pict = R.drawable.home_fon_akustika
-//            val imageUri =
-////            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
-////                    resources.getResourcePackageName(pict) + '/' +
-////                    resources.getResourceTypeName(pict) + '/' +
-////                    pict.toString())
-//
-//            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ packageName +"/"+pict)
-//
-//            shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-//            shareIntent.data = imageUri
-//           // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
-//           shareIntent.type = "image/*"
-//            //shareIntent.setPackage("com.vkontakte.android");
-
              startActivity(Intent.createChooser(shareIntent, "Красное Радио")) //
 
         }
@@ -83,8 +61,4 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-   // val imageUri: Uri = Uri.parse(pictureFile.getAbsolutePath())
-    // Returns the URI path to the Bitmap displayed in specified ImageView
-
-
 }

@@ -4,4 +4,5 @@
     <color name="darkRedMenu">#8A0115</color>
     <color name="borderHome">#550000</color>
     <color name="textForNav">#FCFAD0</color>
+    <color name="textBackgroundAbout">#8A0216</color>
 </resources>

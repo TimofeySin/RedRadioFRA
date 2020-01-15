@@ -10,6 +10,5 @@ interface RetrofitServer {
     @GET("users/zuek1917/status.json")
     fun getStatus(): Call<DataModelStatus>
 
-
 }
 

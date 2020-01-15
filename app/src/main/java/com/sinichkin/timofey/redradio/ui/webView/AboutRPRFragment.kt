@@ -15,7 +15,6 @@ class AboutRPRFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         val root = inflater.inflate(R.layout.fragment_web_view, container, false)
         root.mainWebView.loadUrl(getString(R.string.menu_url_about_rpr))
         return root

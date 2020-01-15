@@ -10,8 +10,6 @@ import kotlinx.android.synthetic.main.fragment_web_view.view.*
 
 class AboutFRAFragment : Fragment() {
 
-
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,5 +19,4 @@ class AboutFRAFragment : Fragment() {
         root.mainWebView.loadUrl(getString(R.string.menu_url_about_fra))
         return  root
     }
-
 }
