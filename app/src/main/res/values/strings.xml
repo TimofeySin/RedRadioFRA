@@ -58,6 +58,8 @@
     <string name="about_art_title">Арт:</string>
     <string name="about_art_name">Мигранов Марат\n https://vk.com/id19118067</string>
     <string name="about_art_cont">https://vk.com/id19118067</string>
-    <string name="path_to_stream">https://myradio24.org/zuek1917</string>
+
+
+    <string name="stream_url">https://myradio24.com/</string>
 
 </resources>

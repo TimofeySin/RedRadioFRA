@@ -2,6 +2,7 @@ package com.sinichkin.timofey.redradio.ui
 
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -58,8 +59,7 @@ class HomeFragment : Fragment() {
     }
 
 
-
-    private fun initChangeLogo(root: View){
+    private fun initChangeLogo(root: View) {
 
         val animUP = R.anim.play_button_transp_up
         val animDown = R.anim.play_button_transp_down
@@ -71,9 +71,15 @@ class HomeFragment : Fragment() {
         animationDown.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
-                root.imageLogoFonHome.setImageDrawable(getDrawable(root.context,R.drawable.rpw_logo))
+                root.imageLogoFonHome.setImageDrawable(
+                    getDrawable(
+                        root.context,
+                        R.drawable.rpw_logo
+                    )
+                )
                 root.imageLogoFonHome.startAnimation(animationUP)
             }
+
             override fun onAnimationStart(animation: Animation?) {}
         })
 
@@ -120,29 +126,29 @@ class HomeFragment : Fragment() {
         if (mModelMedia.getMediaDone()) {
             if (mModelMedia.getMediaPlayer().isPlaying) {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_pause_button)
-                root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt()+15)
-                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt()-1)
+                root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 15)
+                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt() - 1)
             } else {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
                 root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt())
-                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt()-16)
+                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt() - 16)
             }
         }
     }
 
-//////////////////////////////////////////////
+    //////////////////////////////////////////////
 ////нижняя строка название трека
-private fun setNameOfTrack(text: String) {
-    this.view?.let {
-        if (text != it.trackInfo.text)      {
-            it.trackInfo.text = text
-            it.trackInfo.isSelected = true
+    private fun setNameOfTrack(text: String) {
+        this.view?.let {
+            if (text != it.trackInfo.text) {
+                it.trackInfo.text = text
+                it.trackInfo.isSelected = true
+            }
         }
     }
-}
 
 
-    private fun initUpdateNameOfTrack(period:Long){
+    private fun initUpdateNameOfTrack(period: Long) {
         val retrofit = initRetrofit()
         val timer = Timer()
         val monitor = object : TimerTask() {
@@ -153,9 +159,17 @@ private fun setNameOfTrack(text: String) {
         timer.schedule(monitor, 0, period)
     }
 
+    private fun initUpdateNameOfTrackRun(period: Long) {
+        val retrofit = initRetrofit()
+        val handler = Handler()
+        val runnable = Runnable { getNameOfTrack(retrofit) }
+        runnable.run()
+        handler.postDelayed(runnable, 10 * period)
+    }
+
     private fun initRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://myradio24.com/")
+            .baseUrl(getString(R.string.stream_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
