@@ -34,58 +34,54 @@ class HomeFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        changeOrientation(root)
         val mModelMedia = SingletonMediaPlayer
+        changeOrientation(root,mModelMedia.getMediaDone())
         initPlayButtonAnimation(root, mModelMedia)
-
         initControlMediaPlayer(root, mModelMedia)
-        initUpdateNameOfTrack(1000)
+        initUpdateNameOfTrackRun(1000)
 
         return root
     }
 
-    private fun changeOrientation(root: View) {
+    private fun changeOrientation(root: View,mediaDone:Boolean) {
         val params = root.viewBorder.layoutParams
         val currentOrientation = resources.configuration.orientation
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             root.main_layout.orientation = LinearLayout.HORIZONTAL
             params.height = ViewGroup.LayoutParams.MATCH_PARENT
             params.width = 10
+            initChangeLogo(root,mediaDone)
         } else {
             root.main_layout.orientation = LinearLayout.VERTICAL
             params.height = 10
             params.width = ViewGroup.LayoutParams.MATCH_PARENT
+            initChangeLogo(root,mediaDone)
         }
     }
 
-
-    private fun initChangeLogo(root: View) {
-
-        val animUP = R.anim.play_button_transp_up
-        val animDown = R.anim.play_button_transp_down
-        val animationUP: Animation = AnimationUtils.loadAnimation(root.context, animUP)
-        val animationDown: Animation = AnimationUtils.loadAnimation(root.context, animDown)
-        root.imageLogoFonHome.startAnimation(animationDown)
-
-
-        animationDown.setAnimationListener(object : Animation.AnimationListener {
-            override fun onAnimationRepeat(animation: Animation?) {}
-            override fun onAnimationEnd(animation: Animation?) {
-                root.imageLogoFonHome.setImageDrawable(
-                    getDrawable(
-                        root.context,
-                        R.drawable.rpw_logo
+    private fun initChangeLogo(root: View,mediaDone:Boolean) {
+        if (mediaDone) {
+            val animUP = R.anim.play_button_transp_up
+            val animDown = R.anim.play_button_transp_down
+            val animationUP = AnimationUtils.loadAnimation(root.context, animUP)
+            val animationDown = AnimationUtils.loadAnimation(root.context, animDown)
+            root.imageLogoFonHome.startAnimation(animationDown)
+            animationDown.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationRepeat(animation: Animation?) {}
+                override fun onAnimationEnd(animation: Animation?) {
+                    root.imageLogoFonHome.setImageDrawable(
+                        getDrawable(
+                            root.context,
+                            R.drawable.rpw_logo
+                        )
                     )
-                )
-                root.imageLogoFonHome.startAnimation(animationUP)
-            }
-
-            override fun onAnimationStart(animation: Animation?) {}
-        })
-
-        root.controlPlayerButton.startAnimation(animationDown)
+                    root.imageLogoFonHome.startAnimation(animationUP)
+                }
+                override fun onAnimationStart(animation: Animation?) {}
+            })
+            root.controlPlayerButton.startAnimation(animationDown)
+        }
     }
-
 
     private fun initPlayButtonAnimation(root: View, mModelMedia: SingletonMediaPlayer) {
         val anim = R.anim.play_button_transp
@@ -100,7 +96,6 @@ class HomeFragment : Fragment() {
                     root.controlPlayerButton.startAnimation(animation)
                 }
             }
-
             override fun onAnimationStart(animation: Animation?) {}
         })
         root.controlPlayerButton.startAnimation(animation)
@@ -110,7 +105,7 @@ class HomeFragment : Fragment() {
         controlMediaPlayer(root, mModelMedia)
         mModelMedia.getMediaPlayer().setOnPreparedListener {
             mModelMedia.setMediaDone(true)
-            initChangeLogo(root)
+            initChangeLogo(root,mModelMedia.getMediaDone())
         }
         root.controlPlayerButton.setOnClickListener {
             if (mModelMedia.getMediaPlayer().isPlaying) {
@@ -147,24 +142,16 @@ class HomeFragment : Fragment() {
         }
     }
 
-
-    private fun initUpdateNameOfTrack(period: Long) {
-        val retrofit = initRetrofit()
-        val timer = Timer()
-        val monitor = object : TimerTask() {
-            override fun run() {
-                getNameOfTrack(retrofit)
-            }
-        }
-        timer.schedule(monitor, 0, period)
-    }
-
     private fun initUpdateNameOfTrackRun(period: Long) {
         val retrofit = initRetrofit()
         val handler = Handler()
-        val runnable = Runnable { getNameOfTrack(retrofit) }
+        val runnable = object : Runnable {
+            override fun run() {
+                getNameOfTrack(retrofit)
+                handler.postDelayed(this, 10 * period)
+            }
+        }
         runnable.run()
-        handler.postDelayed(runnable, 10 * period)
     }
 
     private fun initRetrofit(): Retrofit {
@@ -194,5 +181,4 @@ class HomeFragment : Fragment() {
         })
 
     }
-
 }
