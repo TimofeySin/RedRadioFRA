@@ -1,12 +1,13 @@
 package com.sinichkin.timofey.redradio
 
+import android.content.res.Resources
 import android.media.MediaPlayer
 
 
-object SingltonMediaPlayer {
+object SingletonMediaPlayer {
     private var mediaDone = false
     private var mMedia: MediaPlayer? = null
-    private const val stream = "https://myradio24.org/zuek1917"
+    private var stream = Resources.getSystem().getString(R.string.path_to_stream)
 
     init {
         if (mMedia == null) {
@@ -30,9 +31,5 @@ object SingltonMediaPlayer {
     fun setMediaDone(newValue: Boolean) {
         mediaDone = newValue
     }
-  //  fun getStreamMetaData():String {
-//        val mmr = MediaMetadataRetriever()
-//        mmr.setDataSource(stream)
-//        return mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)
-  //  }
+
 }
