@@ -30,6 +30,7 @@
         <item name="colorControlNormal">@color/darkRedMenu</item>
         <!-- color of the menu overflow icon -->
         <item name="android:textColorSecondary">@color/darkRedMenu</item>
+        <item name="android:tint">@color/textForNav</item>
     </style>
 
 </resources>
