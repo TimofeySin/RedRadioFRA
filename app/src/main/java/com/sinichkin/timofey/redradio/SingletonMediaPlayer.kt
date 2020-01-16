@@ -2,8 +2,8 @@ package com.sinichkin.timofey.redradio
 
 import android.media.MediaPlayer
 
-
 object SingletonMediaPlayer {
+
     private var mediaDone = false
     private var mMedia: MediaPlayer? = null
     private var stream = "https://myradio24.org/zuek1917"

@@ -7,28 +7,33 @@
 
     <string name="menu_nav_radio">Красное радио ФРА</string>
     <string name="menu_nav_red_radio">Красное радио</string>
+    <string name="share_text">Расскажи товарищам!</string>
 
 
-    <string name="menu_url_about_fra">http://rpw.ru/fra/fra.html</string>
     <string name="menu_nav_about_rpr">О нас</string>
     <string name="menu_url_about_rpr">http://www.rpw.ru/rkr/aboutrkr.html</string>
+
     <string name="menu_nav_articlesRPR">Устав Рабочей партии России</string>
     <string name="menu_url_articlesRPR">https://www.r-p-w.ru/ustav.html</string>
+
     <string name="menu_nav_program_rpr">Программа Рабочей партии России</string>
     <string name="menu_url_program_rpr">https://www.r-p-w.ru/programma.html</string>
+
     <string name="menu_nav_library_fra">Библиотека ФРА</string>
     <string name="menu_url_library_fra">http://bibl.rpw-mos.ru/</string>
+
     <string name="menu_nav_rkr">Российский комитет рабочих</string>
     <string name="menu_url_rkr">http://rpw-mos.ru/rossijskij-komitet-rabochix/</string>
+
     <string name="menu_nav_prof_doc">Документы по профсоюзу</string>
     <string name="menu_url_prof_doc">http://bibl.rpw-mos.ru/dokumenty-pervichnoj-profsoyuznoj-organizacii/</string>
+
     <string name="menu_nav_ku">Красный университет</string>
     <string name="menu_url_ku">http://rpw-mos.ru/krasnyj-universitet/</string>
 
-
-
-
     <string name="menu_nav_fra">Фонд рабочей академии</string>
+    <string name="menu_url_fra">http://rpw.ru/fra/fra.html</string>
+
     <string name="menu_share">Поделиться</string>
     <string name="header_for_about">Красное Радио Фонда Рабочей Академии (Фонда содействия обучению рабочих) - это интернет радио. Красное Радио создано и действует при поддержке Фонда Рабочей Академии и Рабочей партии России. Целью радио является просвещение трудящихся, помощь в изучении общественных наук, в частности, марксизма-ленинизма в единстве его трех источников и составных частей:диалектического материализма, политической экономии и научного социализма. В самом широком смысле суть наших усилий - в формировании материалистического взгляда на действительность и научной картины мира с целью его преобразования в интересах рабочего класса, трудящихся
  </string>

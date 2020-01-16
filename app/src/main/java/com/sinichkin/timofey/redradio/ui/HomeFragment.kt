@@ -22,8 +22,6 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.util.*
-
 
 class HomeFragment : Fragment() {
 
@@ -101,6 +99,8 @@ class HomeFragment : Fragment() {
         root.controlPlayerButton.startAnimation(animation)
     }
 
+    //region Init MediaPlayer
+
     private fun initControlMediaPlayer(root: View, mModelMedia: SingletonMediaPlayer) {
         controlMediaPlayer(root, mModelMedia)
         mModelMedia.getMediaPlayer().setOnPreparedListener {
@@ -131,8 +131,10 @@ class HomeFragment : Fragment() {
         }
     }
 
-    //////////////////////////////////////////////
-////нижняя строка название трека
+    //endregion
+
+    //region Name play track
+
     private fun setNameOfTrack(text: String) {
         this.view?.let {
             if (text != it.trackInfo.text) {
@@ -181,4 +183,6 @@ class HomeFragment : Fragment() {
         })
 
     }
+
+    //endregion
 }

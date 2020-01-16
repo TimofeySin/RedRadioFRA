@@ -1,6 +1,5 @@
 package com.sinichkin.timofey.redradio
 
-
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -14,7 +13,6 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -53,7 +51,6 @@ class MainActivity : AppCompatActivity() {
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
             shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=com.sinichkin.timofey.redradio")
              startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
-
 
 
 
