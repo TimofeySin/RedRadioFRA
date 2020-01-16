@@ -3,7 +3,6 @@
     package="com.sinichkin.timofey.redradio">
 
     <uses-permission android:name="android.permission.INTERNET" />
-<!--    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />-->
     <application
         android:fullBackupContent="true"
         android:usesCleartextTraffic="true"
@@ -14,9 +13,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <meta-data
-            android:name="com.google.android.actions"
-            android:resource="@anim/play_button_transp"/>
 
         <activity
             android:label="@string/app_name"
