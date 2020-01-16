@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimaryDark">#323232</color>
-    <color name="colorAccent">#D81B24</color>
-    <color name="navigationIconColor">#a72410</color>
+    <color name="darkRedMenu">#8A0115</color>
     <color name="borderHome">#550000</color>
     <color name="textForNav">#FCFAD0</color>
-    </resources>
+    <color name="textBackgroundAbout">#8A0216</color>
+</resources>

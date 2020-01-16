@@ -1,11 +1,6 @@
-package com.sinichkin.timofey.redradio
+package ru.rpw.radio
 
-
-import android.content.ContentResolver
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -19,15 +14,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-import java.io.ByteArrayOutputStream
-
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.AppTheme_NoActionBar)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
@@ -38,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home//, R.id.nav_about, R.id.nav_about_rkr, R.id.nav_articles_rpr, R.id.nav_program_rpr, R.id.nav_library_fra, R.id.nav_rkr
+                R.id.nav_home
             ), drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
@@ -55,31 +48,12 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == R.id.action_share ){
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Красное Радио ФРА")
-            shareIntent.putExtra(Intent.EXTRA_TEXT,"Это лучшее радио на свете!")
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
+            shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=ru.rpw.radio")
+             startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
 
-            val bitmap =
-                BitmapFactory.decodeResource(resources, R.drawable.rpw_logo) // your bitmap
-            val bs = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 50, bs)
 
-            //shareIntent.putExtra("image/*", bs.toByteArray())
-            val pict = R.drawable.home_fon_akustika
-            val imageUri =
-//            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" +
-//                    resources.getResourcePackageName(pict) + '/' +
-//                    resources.getResourceTypeName(pict) + '/' +
-//                    pict.toString())
 
-            Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://"+ packageName +"/"+pict)
-
-            shareIntent.flags = Intent.FLAG_GRANT_READ_URI_PERMISSION
-            shareIntent.data = imageUri
-           // shareIntent.putExtra(Intent.EXTRA_STREAM, imageUri)
-           shareIntent.type = "image/*"
-            //shareIntent.setPackage("com.vkontakte.android");
-
-             startActivity(Intent.createChooser(shareIntent, "Красное Радио")) //
 
         }
         return super.onOptionsItemSelected(item)
@@ -89,8 +63,5 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-   // val imageUri: Uri = Uri.parse(pictureFile.getAbsolutePath())
-    // Returns the URI path to the Bitmap displayed in specified ImageView
-
 
 }

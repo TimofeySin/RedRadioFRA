@@ -1,11 +1,13 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/navigationIconColor</item>
+        <item name="colorPrimary">@color/darkRedMenu</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/darkRedMenu</item>
+    </style>
+
+    <style name="SplashTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@drawable/ic_splash_screen</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -14,16 +16,20 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorSecondary">@color/navigationIconColor</item>
+        <item name="android:textColorSecondary">@color/borderHome</item>
+        <item name="android:tint">@color/textForNav</item>
+    </style>
+
+    <style name="AppTheme.AboutFragment" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:textColor">@color/textForNav</item>
+        <item name="android:textColorLink">@color/textForNav</item>
     </style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
-
         <!-- navigation icon color -->
-        <item name="colorControlNormal">@color/navigationIconColor</item>
-
+        <item name="colorControlNormal">@color/darkRedMenu</item>
         <!-- color of the menu overflow icon -->
-        <item name="android:textColorSecondary">@color/navigationIconColor</item>
+        <item name="android:textColorSecondary">@color/darkRedMenu</item>
     </style>
 
 </resources>

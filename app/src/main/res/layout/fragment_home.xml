@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,46 +14,66 @@
         android:background="@drawable/home_fon_akustika">
 
         <ImageView
-            android:id="@+id/imageView5"
+            android:id="@+id/imageLogoFonHome"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingTop="100dp"
+            android:layout_gravity="bottom|center"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/rpr_logo"
-            app:srcCompat="@drawable/rpw_logo" />
+            android:paddingTop="100dp"
+
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/gegel" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/generalTitle"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="2"
-                android:fontFamily="@font/roboto"
-                android:padding="@dimen/fab_margin"
-                android:text="@string/nav_header_title"
-                android:textAlignment="center"
-                android:textColor="@color/textForNav"
-                android:textSize="30sp" />
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/controlPlayerButton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:contentDescription="@string/play_button"
-                app:srcCompat="@drawable/ic_play_button" />
+                <TextView
+                    android:id="@+id/generalTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/fab_margin"
+                    android:singleLine="false"
+                    android:text="@string/nav_header_title"
+                    android:textAlignment="center"
+                    android:textColor="@color/textForNav"
+                    app:autoSizeTextType="uniform" />
+
+                <TextView
+                    android:id="@+id/generalTitle2"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/roboto"
+                    android:padding="@dimen/fab_margin"
+                    android:singleLine="false"
+                    android:text="@string/menu_nav_fra"
+                    android:textAlignment="center"
+                    android:textColor="@color/textForNav"
+                    android:visibility="invisible"
+                    app:autoSizeTextType="uniform" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/trackInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
+                android:layout_weight="1"
                 android:ellipsize="marquee"
                 android:fontFamily="@font/roboto"
-                android:gravity="center"
+                android:gravity="bottom"
+                android:padding="@dimen/activity_horizontal_margin"
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textColor="@color/textForNav"
@@ -73,25 +94,15 @@
         android:background="@drawable/fon_wood">
 
         <ImageView
-            android:id="@+id/imageVolumeButtonShadow"
+            android:id="@+id/controlPlayerButton"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:contentDescription="@string/volume_button"
-            app:srcCompat="@drawable/volume_regulator_shadow" />
+            android:contentDescription="@string/play_button"
+            android:padding="@dimen/activity_horizontal_margin"
 
-        <ImageView
-            android:id="@+id/imageVolumeButton"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/volume_button"
-            android:cropToPadding="false"
-            android:rotation="180"
-            app:srcCompat="@drawable/volume_regulator" />
+            app:srcCompat="@drawable/ic_play_button"
+            tools:visibility="visible" />
 
-        <com.sinichkin.timofey.redradio.VolumeButtonView
-            android:id="@+id/controlVolumeButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
     </FrameLayout>
 
 </LinearLayout>

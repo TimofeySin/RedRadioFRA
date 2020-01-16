@@ -1,16 +1,18 @@
-package com.sinichkin.timofey.redradio.ui
+package ru.rpw.radio.ui
 
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
+import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
-import com.sinichkin.timofey.redradio.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,56 +31,66 @@ class HomeFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
-        changeOrientation(root)
-        val mModelMedia = SingltonMediaPlayer
-        initVolumeButton(root, mModelMedia)
-        initPlayButtonAnimation(root, mModelMedia)
+        getRandomBackground(root)?.let { root.imageLogoFonHome.setImageDrawable(it) }
 
+        val mModelMedia = SingletonMediaPlayer
+        changeOrientation(root,mModelMedia.getMediaDone())
+        initPlayButtonAnimation(root, mModelMedia)
         initControlMediaPlayer(root, mModelMedia)
-        initUpdateNameOfTrack(1000)
+        initUpdateNameOfTrackRun(1000)
 
         return root
     }
 
-    private fun changeOrientation(root: View) {
+    private fun getRandomBackground(root: View): Drawable? {
+        val backgroundList : Array<Int> = arrayOf(R.drawable.gegel, R.drawable.marx)
+        val rand = Random()
+        val back =  backgroundList[rand.nextInt(backgroundList.size)]
+
+        return getDrawable(root.context,back)
+    }
+
+    private fun changeOrientation(root: View,mediaDone:Boolean) {
         val params = root.viewBorder.layoutParams
         val currentOrientation = resources.configuration.orientation
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             root.main_layout.orientation = LinearLayout.HORIZONTAL
             params.height = ViewGroup.LayoutParams.MATCH_PARENT
             params.width = 10
+            initChangeLogo(root,mediaDone)
         } else {
             root.main_layout.orientation = LinearLayout.VERTICAL
             params.height = 10
             params.width = ViewGroup.LayoutParams.MATCH_PARENT
+            initChangeLogo(root,mediaDone)
         }
     }
 
-///////// Все связанное со звуком
-//////////////////////////////////////////////
-
-    private fun initVolumeButton(root: View, mModelMedia: SingltonMediaPlayer) {
-        root.controlVolumeButton.setSecondView(root.imageVolumeButton)
-        root.controlVolumeButton.setOnSliderMovedListener(object :
-            VolumeButtonView.OnSliderMovedListener {
-            override fun onSliderMoved(pos: Double, firstPos: Double, startRotation: Float) {
-                val posAngle = root.controlVolumeButton.convertClockToPosition(pos.toFloat())
-                val firstPosAngle =
-                    root.controlVolumeButton.convertClockToPosition(firstPos.toFloat())
-                val percent = posAngle * 100f / 360f
-                val endPercent = root.controlVolumeButton.roundAngle(
-                    (startRotation - (firstPosAngle - posAngle)),
-                    root.imageVolumeButton.rotation
-                )
-                root.imageVolumeButton.rotation = endPercent
-                mModelMedia.getMediaPlayer().setVolume(percent / 100 * 2f, percent / 100 * 2f)
-            }
-        })
+    private fun initChangeLogo(root: View,mediaDone:Boolean) {
+        if (mediaDone) {
+            val animationUP = AnimationUtils.loadAnimation(root.context, R.anim.logo_transp_up)
+            val animationDown = AnimationUtils.loadAnimation(root.context, R.anim.logo_transp_down)
+            root.imageLogoFonHome.startAnimation(animationDown)
+            animationDown.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationRepeat(animation: Animation?) {}
+                override fun onAnimationEnd(animation: Animation?) {
+                    root.imageLogoFonHome.setImageDrawable(
+                        getDrawable(
+                            root.context,
+                            R.drawable.rpw_logo
+                        )
+                    )
+                    root.imageLogoFonHome.startAnimation(animationUP)
+                }
+                override fun onAnimationStart(animation: Animation?) {}
+            })
+            root.imageLogoFonHome.startAnimation(animationDown)
+        }
     }
 
-    private fun initPlayButtonAnimation(root: View, mModelMedia: SingltonMediaPlayer) {
-        val anim = R.anim.play_button_transp
-        val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
+    private fun initPlayButtonAnimation(root: View, mModelMedia: SingletonMediaPlayer) {
+
+        val animation: Animation = AnimationUtils.loadAnimation(root.context, R.anim.play_button_transp)
         animation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
@@ -89,16 +101,17 @@ class HomeFragment : Fragment() {
                     root.controlPlayerButton.startAnimation(animation)
                 }
             }
-
             override fun onAnimationStart(animation: Animation?) {}
         })
         root.controlPlayerButton.startAnimation(animation)
     }
 
-    private fun initControlMediaPlayer(root: View, mModelMedia: SingltonMediaPlayer) {
+    //region Init MediaPlayer
+    private fun initControlMediaPlayer(root: View, mModelMedia: SingletonMediaPlayer) {
         controlMediaPlayer(root, mModelMedia)
         mModelMedia.getMediaPlayer().setOnPreparedListener {
             mModelMedia.setMediaDone(true)
+            initChangeLogo(root,mModelMedia.getMediaDone())
         }
         root.controlPlayerButton.setOnClickListener {
             if (mModelMedia.getMediaPlayer().isPlaying) {
@@ -110,39 +123,46 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun controlMediaPlayer(root: View, mModelMedia: SingltonMediaPlayer) {
+    private fun controlMediaPlayer(root: View, mModelMedia: SingletonMediaPlayer) {
         if (mModelMedia.getMediaDone()) {
             if (mModelMedia.getMediaPlayer().isPlaying) {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_pause_button)
-                root.controlPlayerButton.setPadding(40)
+                root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 15)
+
             } else {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
-                root.controlPlayerButton.setPadding(0)
+                root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt())
+
+            }
+        }
+    }
+    //endregion
+
+    //region Name play track
+    private fun setNameOfTrack(text: String) {
+        this.view?.let {
+            if (text != it.trackInfo.text) {
+                it.trackInfo.text = text
+                it.trackInfo.isSelected = true
             }
         }
     }
 
-//////////////////////////////////////////////
-////нижняя строка название трека
-    private fun setNameOfTrack(text: String) {
-        this.view!!.trackInfo.text = text
-        this.view!!.trackInfo.isSelected = true
-    }
-
-    private fun initUpdateNameOfTrack(period:Long){
+    private fun initUpdateNameOfTrackRun(period: Long) {
         val retrofit = initRetrofit()
-        val timer = Timer()
-        val monitor = object : TimerTask() {
+        val handler = Handler()
+        val runnable = object : Runnable {
             override fun run() {
                 getNameOfTrack(retrofit)
+                handler.postDelayed(this, 10 * period)
             }
         }
-        timer.schedule(monitor, 0, period)
+        runnable.run()
     }
 
     private fun initRetrofit(): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("https://myradio24.org/")
+            .baseUrl(getString(R.string.stream_url))
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
@@ -167,9 +187,5 @@ class HomeFragment : Fragment() {
         })
 
     }
-
-//////////////////////////////////////////////
-
-
-
+    //endregion
 }
