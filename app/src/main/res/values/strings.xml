@@ -10,8 +10,6 @@
     <string name="share_text">Расскажи товарищам!</string>
 
 
-    <string name="menu_nav_about_rpr">О нас</string>
-    <string name="menu_url_about_rpr">http://www.rpw.ru/rkr/aboutrkr.html</string>
 
     <string name="menu_nav_articlesRPR">Устав Рабочей партии России</string>
     <string name="menu_url_articlesRPR">https://www.r-p-w.ru/ustav.html</string>
@@ -42,28 +40,21 @@
     <string name="menu_about">О приложении</string>
     <string name="rpr_logo">Логотип Рабочей партии России</string>
     <string name="play_button">PLAY</string>
-    <string name="volume_button">VOLUME</string>
-
 
     <string name="about_contact">Информационные ресурсы:</string>
     <string name="about_responsible">Ответственные:</string>
 
     <string name="about_programmer_title">Разработка:</string>
     <string name="about_programmer_name">Синичкин Тимофей\n timofeysin@gmail.com</string>
-    <string name="about_programmer_cont">timofeysin@gmail.com</string>
 
     <string name="about_designer_title">Дизайн:</string>
     <string name="about_designer_name">Кошкина Полина\n https://vk.com/ozzenka</string>
-    <string name="about_designer_cont">https://vk.com/ozzenka</string>
 
     <string name="about_idea_title">Главный редактор:</string>
     <string name="about_idea_name">Гомелаури Пётр\n gomelauri-pv@rpw-mos.ru\n https://vk.com/dedshykar</string>
-    <string name="about_idea_cont_vk">https://vk.com/dedshykar</string>
 
     <string name="about_art_title">Арт:</string>
     <string name="about_art_name">Мигранов Марат\n https://vk.com/id19118067</string>
-    <string name="about_art_cont">https://vk.com/id19118067</string>
-
 
     <string name="stream_url">https://myradio24.com/</string>
 

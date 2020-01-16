@@ -1,6 +1,7 @@
 package com.sinichkin.timofey.redradio.ui
 
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
@@ -8,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
+import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.setPadding
@@ -22,6 +24,8 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
+
 
 class HomeFragment : Fragment() {
 
@@ -32,6 +36,8 @@ class HomeFragment : Fragment() {
     ): View? {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
+        getRandomBackground(root)?.let { root.imageLogoFonHome.setImageDrawable(it) }
+        
         val mModelMedia = SingletonMediaPlayer
         changeOrientation(root,mModelMedia.getMediaDone())
         initPlayButtonAnimation(root, mModelMedia)
@@ -39,6 +45,14 @@ class HomeFragment : Fragment() {
         initUpdateNameOfTrackRun(1000)
 
         return root
+    }
+
+    private fun getRandomBackground(root: View): Drawable? {
+        val backgroundList : Array<Int> = arrayOf(R.drawable.gegel, R.drawable.marx)
+        val rand = Random()
+        val back =  backgroundList[rand.nextInt(backgroundList.size)]
+
+        return getDrawable(root.context,back)
     }
 
     private fun changeOrientation(root: View,mediaDone:Boolean) {
@@ -100,7 +114,6 @@ class HomeFragment : Fragment() {
     }
 
     //region Init MediaPlayer
-
     private fun initControlMediaPlayer(root: View, mModelMedia: SingletonMediaPlayer) {
         controlMediaPlayer(root, mModelMedia)
         mModelMedia.getMediaPlayer().setOnPreparedListener {
@@ -130,11 +143,9 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
     //endregion
 
     //region Name play track
-
     private fun setNameOfTrack(text: String) {
         this.view?.let {
             if (text != it.trackInfo.text) {
@@ -183,6 +194,5 @@ class HomeFragment : Fragment() {
         })
 
     }
-
     //endregion
 }
