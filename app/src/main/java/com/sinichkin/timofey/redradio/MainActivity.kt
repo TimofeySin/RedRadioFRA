@@ -50,10 +50,15 @@ class MainActivity : AppCompatActivity() {
         if (item.itemId == R.id.action_share ){
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "Красное Радио ФРА")
-            shareIntent.putExtra(Intent.EXTRA_TEXT,"Расскажи товарищам! [тут будет ссылка]")
-             startActivity(Intent.createChooser(shareIntent, "Красное Радио")) //
+            shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
+            shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=com.sinichkin.timofey.redradio")
+             startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
 
+
+
+
+////http://play.google.com/store/apps/details?id=com.sinichkin.timofey.redradio
+////
         }
         return super.onOptionsItemSelected(item)
     }
