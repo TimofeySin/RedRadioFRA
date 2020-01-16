@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "881943544615",
+    "firebase_url": "https://redradio-46c4c.firebaseio.com",
+    "project_id": "redradio-46c4c",
+    "storage_bucket": "redradio-46c4c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:881943544615:android:40e89b2a7974085cdd9f02",
+        "android_client_info": {
+          "package_name": "ru.rpw.radio"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "881943544615-eu22f5st3l9n53vfkcg4d34j8sf6dnum.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.rpw.radio",
+            "certificate_hash": "5b589c300d85f37691d5fcab48ff3096a2c2b0f9"
+          }
+        },
+        {
+          "client_id": "881943544615-rb4kmad3s0mf56mlrd224gpmv576m28a.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBiZPF-zxC--0vF9fcGWigrx34M4sAOyI8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "881943544615-rb4kmad3s0mf56mlrd224gpmv576m28a.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
