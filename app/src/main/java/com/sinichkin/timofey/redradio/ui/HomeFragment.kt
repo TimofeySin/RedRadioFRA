@@ -72,10 +72,8 @@ class HomeFragment : Fragment() {
 
     private fun initChangeLogo(root: View,mediaDone:Boolean) {
         if (mediaDone) {
-            val animUP = R.anim.play_button_transp_up
-            val animDown = R.anim.play_button_transp_down
-            val animationUP = AnimationUtils.loadAnimation(root.context, animUP)
-            val animationDown = AnimationUtils.loadAnimation(root.context, animDown)
+            val animationUP = AnimationUtils.loadAnimation(root.context, R.anim.logo_transp_up)
+            val animationDown = AnimationUtils.loadAnimation(root.context, R.anim.logo_transp_down)
             root.imageLogoFonHome.startAnimation(animationDown)
             animationDown.setAnimationListener(object : Animation.AnimationListener {
                 override fun onAnimationRepeat(animation: Animation?) {}
@@ -90,13 +88,13 @@ class HomeFragment : Fragment() {
                 }
                 override fun onAnimationStart(animation: Animation?) {}
             })
-            root.controlPlayerButton.startAnimation(animationDown)
+            root.imageLogoFonHome.startAnimation(animationDown)
         }
     }
 
     private fun initPlayButtonAnimation(root: View, mModelMedia: SingletonMediaPlayer) {
-        val anim = R.anim.play_button_transp
-        val animation: Animation = AnimationUtils.loadAnimation(root.context, anim)
+
+        val animation: Animation = AnimationUtils.loadAnimation(root.context, R.anim.play_button_transp)
         animation.setAnimationListener(object : Animation.AnimationListener {
             override fun onAnimationRepeat(animation: Animation?) {}
             override fun onAnimationEnd(animation: Animation?) {
@@ -134,11 +132,11 @@ class HomeFragment : Fragment() {
             if (mModelMedia.getMediaPlayer().isPlaying) {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_pause_button)
                 root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt() + 15)
-                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt() - 1)
+
             } else {
                 root.controlPlayerButton.setImageResource(R.drawable.ic_play_button)
                 root.controlPlayerButton.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt())
-                root.controlPlayerButtonShadow.setPadding(resources.getDimension(R.dimen.activity_horizontal_margin).toInt() - 16)
+
             }
         }
     }

@@ -73,6 +73,7 @@
                 android:ellipsize="marquee"
                 android:fontFamily="@font/roboto"
                 android:gravity="bottom"
+                android:padding="@dimen/activity_horizontal_margin"
                 android:singleLine="true"
                 android:textAlignment="center"
                 android:textColor="@color/textForNav"
@@ -91,15 +92,6 @@
         android:layout_height="match_parent"
         android:layout_weight="9"
         android:background="@drawable/fon_wood">
-
-        <ImageView
-            android:id="@+id/controlPlayerButtonShadow"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:contentDescription="@string/play_button"
-            android:padding="@dimen/nav_header_vertical_spacing"
-            android:visibility="invisible"
-            app:srcCompat="@drawable/ic_play_button_shadow" />
 
         <ImageView
             android:id="@+id/controlPlayerButton"

@@ -1,6 +1,5 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/darkRedMenu</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -17,18 +16,17 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorSecondary">@color/darkRedMenu</item>
-
+        <item name="android:textColorSecondary">@color/borderHome</item>
     </style>
+
     <style name="AppTheme.AboutFragment" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColor">@color/textForNav</item>
         <item name="android:textColorLink">@color/textForNav</item>
     </style>
-    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
 
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <!-- navigation icon color -->
         <item name="colorControlNormal">@color/darkRedMenu</item>
-
         <!-- color of the menu overflow icon -->
         <item name="android:textColorSecondary">@color/darkRedMenu</item>
     </style>
