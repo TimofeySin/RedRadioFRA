@@ -1,4 +1,4 @@
-package com.sinichkin.timofey.redradio.ui
+package ru.rpw.radio.ui
 
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
@@ -13,10 +13,6 @@ import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.setPadding
 import androidx.fragment.app.Fragment
-import com.sinichkin.timofey.redradio.DataModelStatus
-import com.sinichkin.timofey.redradio.R
-import com.sinichkin.timofey.redradio.RetrofitServer
-import com.sinichkin.timofey.redradio.SingletonMediaPlayer
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
 import retrofit2.Callback

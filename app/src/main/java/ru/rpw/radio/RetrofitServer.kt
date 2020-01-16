@@ -1,4 +1,4 @@
-package com.sinichkin.timofey.redradio
+package ru.rpw.radio
 
 import retrofit2.Call
 import retrofit2.http.GET

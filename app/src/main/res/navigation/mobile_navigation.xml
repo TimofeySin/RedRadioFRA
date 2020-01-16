@@ -6,15 +6,15 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.sinichkin.timofey.redradio.ui.HomeFragment"
+        android:name="ru.rpw.radio.ui.HomeFragment"
         android:label="@string/menu_nav_radio" />
     <fragment
         android:id="@+id/nav_about"
-        android:name="com.sinichkin.timofey.redradio.ui.AboutFragment"
+        android:name="ru.rpw.radio.ui.AboutFragment"
         android:label="@string/menu_about" />
     <fragment
         android:id="@+id/nav_about_fra"
-        android:name="com.sinichkin.timofey.redradio.ui.WebViewFragment"
+        android:name="ru.rpw.radio.ui.WebViewFragment"
         android:label="@string/menu_nav_fra">
         <argument
             android:name="urlWebView"
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_articles_rpr"
-        android:name="com.sinichkin.timofey.redradio.ui.WebViewFragment"
+        android:name="ru.rpw.radio.ui.WebViewFragment"
         android:label="@string/menu_nav_articlesRPR">
         <argument
             android:name="urlWebView"
@@ -33,7 +33,7 @@
 
     <fragment
         android:id="@+id/nav_program_rpr"
-        android:name="com.sinichkin.timofey.redradio.ui.WebViewFragment"
+        android:name="ru.rpw.radio.ui.WebViewFragment"
         android:label="@string/menu_nav_program_rpr">
         <argument
             android:name="urlWebView"
@@ -43,7 +43,7 @@
 
     <fragment
         android:id="@+id/nav_library_fra"
-        android:name="com.sinichkin.timofey.redradio.ui.WebViewFragment"
+        android:name="ru.rpw.radio.ui.WebViewFragment"
         android:label="@string/menu_nav_library_fra">
         <argument
             android:name="urlWebView"
@@ -53,7 +53,7 @@
 
     <fragment
         android:id="@+id/nav_rkr"
-        android:name="com.sinichkin.timofey.redradio.ui.WebViewFragment"
+        android:name="ru.rpw.radio.ui.WebViewFragment"
         android:label="@string/menu_nav_rkr">
         <argument
             android:name="urlWebView"
@@ -63,7 +63,7 @@
 
     <fragment
         android:id="@+id/nav_prof_doc"
-        android:name="com.sinichkin.timofey.redradio.ui.WebViewFragment"
+        android:name="ru.rpw.radio.ui.WebViewFragment"
         android:label="@string/menu_nav_prof_doc">
         <argument
             android:name="urlWebView"
@@ -76,7 +76,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_ku"
-        android:name="com.sinichkin.timofey.redradio.ui.WebViewFragment"
+        android:name="ru.rpw.radio.ui.WebViewFragment"
         android:label="@string/menu_nav_ku">
         <argument
             android:name="urlWebView"

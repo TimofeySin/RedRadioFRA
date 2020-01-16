@@ -1,4 +1,4 @@
-package com.sinichkin.timofey.redradio.ui
+package ru.rpw.radio.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.sinichkin.timofey.redradio.R
 import kotlinx.android.synthetic.main.fragment_web_view.*
+import ru.rpw.radio.R
 
 class WebViewFragment : Fragment() {
 

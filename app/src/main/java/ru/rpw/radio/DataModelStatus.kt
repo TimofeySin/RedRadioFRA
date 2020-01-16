@@ -1,4 +1,4 @@
-package com.sinichkin.timofey.redradio
+package ru.rpw.radio
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

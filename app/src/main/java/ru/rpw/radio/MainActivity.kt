@@ -1,4 +1,4 @@
-package com.sinichkin.timofey.redradio
+package ru.rpw.radio
 
 import android.content.Intent
 import android.os.Bundle
@@ -49,13 +49,12 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
-            shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=com.sinichkin.timofey.redradio")
+            shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=ru.rpw.radio")
              startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
 
 
 
-////http://play.google.com/store/apps/details?id=com.sinichkin.timofey.redradio
-////
+
         }
         return super.onOptionsItemSelected(item)
     }
