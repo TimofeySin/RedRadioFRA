@@ -17,6 +17,7 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
         <item name="android:textColorSecondary">@color/borderHome</item>
+        <item name="android:tint">@color/textForNav</item>
     </style>
 
     <style name="AppTheme.AboutFragment" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
