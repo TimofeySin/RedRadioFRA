@@ -9,7 +9,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.core.view.setPadding
@@ -37,7 +36,7 @@ class HomeFragment : Fragment() {
         val root = inflater.inflate(R.layout.fragment_home, container, false)
 
         getRandomBackground(root)?.let { root.imageLogoFonHome.setImageDrawable(it) }
-        
+
         val mModelMedia = SingletonMediaPlayer
         changeOrientation(root,mModelMedia.getMediaDone())
         initPlayButtonAnimation(root, mModelMedia)
