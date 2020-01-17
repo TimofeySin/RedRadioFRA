@@ -1,10 +1,13 @@
 apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
-apply plugin: 'com.google.gms.google-services'
 apply plugin: 'kotlin-android-extensions'
-// Add the Fabric plugin.
-//apply plugin: 'io.fabric'
+
+// Add this line
+apply plugin: 'com.google.gms.google-services'
+
+// Apply the Crashlytics Gradle plugin
+apply plugin: 'com.google.firebase.crashlytics'
 
 android {
     compileSdkVersion 29
@@ -55,9 +58,10 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:converter-gson:2.1.0'
     // add the Firebase SDK for Google Analytics
-    //implementation 'com.google.firebase:firebase-analytics:17.2.2'
+    implementation 'com.google.firebase:firebase-analytics:17.2.2'
 
-    // Add the Firebase Crashlytics dependency.
-   // implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
+// Add the Firebase SDK for Crashlytics.
+    implementation 'com.google.firebase:firebase-crashlytics:17.0.0-beta01'
+
 
 }

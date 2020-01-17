@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:881943544615:android:40e89b2a7974085cdd9f02",
+        "mobilesdk_app_id": "1:881943544615:android:07127983825f2eb5dd9f02",
         "android_client_info": {
           "package_name": "ru.rpw.radio"
         }
       },
       "oauth_client": [
         {
-          "client_id": "881943544615-eu22f5st3l9n53vfkcg4d34j8sf6dnum.apps.googleusercontent.com",
+          "client_id": "881943544615-dc7239ohmqr48jk12q7feh16ueshi4s7.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ru.rpw.radio",
-            "certificate_hash": "5b589c300d85f37691d5fcab48ff3096a2c2b0f9"
+            "certificate_hash": "d5980a0948f7824171ad7a5e58d8f8ade2ad82d7"
           }
         },
         {
