@@ -2,7 +2,7 @@
 <network-security-config>
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">rpw-mos.ru</domain>
-        <domain includeSubdomains="true">www.rpw.ru</domain>
+        <domain includeSubdomains="true">rpw.ru</domain>
         <domain includeSubdomains="true">www.r-p-w.ru</domain>
         <domain includeSubdomains="true">rpw-krd.ru</domain>
     </domain-config>
