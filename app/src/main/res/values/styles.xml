@@ -15,8 +15,8 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
-        <item name="android:textColorSecondary">@color/borderHome</item>
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat">
+        <item name="android:textColorSecondary">@color/textForNav</item>
         <item name="android:tint">@color/textForNav</item>
         <item name="android:foregroundTint" tools:targetApi="lollipop">@color/textForNav</item>
     </style>
