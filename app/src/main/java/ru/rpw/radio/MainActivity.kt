@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
-            shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" https://yadi.sk/d/NRx-p1ngIUp-oA")
+            shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=ru.rpw.radio")
              startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
             //http://play.google.com/store/apps/details?id=ru.rpw.radio
 
