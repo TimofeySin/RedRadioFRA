@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun getRandomBackground(root: View): Drawable? {
-        val backgroundList : Array<Int> = arrayOf(R.drawable.gegel, R.drawable.marx,R.drawable.engels)
+        val backgroundList : Array<Int> = arrayOf(R.drawable.gegel, R.drawable.marx,R.drawable.engels,R.drawable.gegel2)
         val rand = Random()
         val back =  backgroundList[rand.nextInt(backgroundList.size)]
 
