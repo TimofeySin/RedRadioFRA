@@ -4,6 +4,7 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -43,13 +44,25 @@ class MainActivity : AppCompatActivity() {
         checkManifestPermission()
     }
 
-    private fun checkManifestPermission(){
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_HEADSETHOOK) {
+            if (SingletonMediaPlayer.isPlaying()) {
+                SingletonMediaPlayer.pauseMediaPlayer()
+            } else {
+                SingletonMediaPlayer.recoverStatusPlayer()
+            }
+        }
+        return super.onKeyDown(keyCode, event)
+    }
+
+    private fun checkManifestPermission() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
-            != PackageManager.PERMISSION_GRANTED) {
+            != PackageManager.PERMISSION_GRANTED
+        ) {
             // Permission is not granted
             // Ask for permission
             val arrayString = arrayOf(Manifest.permission.READ_PHONE_STATE)
-            ActivityCompat.requestPermissions(this,arrayString, 1)
+            ActivityCompat.requestPermissions(this, arrayString, 1)
         }
     }
 
@@ -60,12 +73,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_share ){
+        if (item.itemId == R.id.action_share) {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.type = "text/plain"
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
-            shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=ru.rpw.radio")
-             startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
+            shareIntent.putExtra(
+                Intent.EXTRA_TEXT,
+                getString(R.string.share_text) + " http://play.google.com/store/apps/details?id=ru.rpw.radio"
+            )
+            startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
         }
         return super.onOptionsItemSelected(item)
     }

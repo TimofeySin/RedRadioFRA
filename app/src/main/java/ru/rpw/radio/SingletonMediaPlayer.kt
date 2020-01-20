@@ -23,6 +23,10 @@ object SingletonMediaPlayer {
         }
     }
 
+    fun isPlaying(): Boolean {
+        mMedia?.let { return it.isPlaying } ?: run { return false }
+    }
+
     fun getMediaPlayer(): MediaPlayer {
         return mMedia!!
     }
@@ -49,7 +53,7 @@ object SingletonMediaPlayer {
     }
 
     fun recoverStatusPlayer() {
-        if (lastStatusPlay){
+        if (lastStatusPlay) {
             mMedia?.start()
         }
     }
