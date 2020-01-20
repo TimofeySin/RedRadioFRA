@@ -1,10 +1,14 @@
 package ru.rpw.radio
 
+import android.Manifest
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -36,6 +40,17 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
+        checkManifestPermission()
+    }
+
+    private fun checkManifestPermission(){
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_PHONE_STATE)
+            != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Ask for permission
+            val arrayString = arrayOf(Manifest.permission.READ_PHONE_STATE)
+            ActivityCompat.requestPermissions(this,arrayString, 1)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,11 +66,6 @@ class MainActivity : AppCompatActivity() {
             shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
             shareIntent.putExtra(Intent.EXTRA_TEXT,getString(R.string.share_text)+" http://play.google.com/store/apps/details?id=ru.rpw.radio")
              startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
-            //http://play.google.com/store/apps/details?id=ru.rpw.radio
-
-
-
-
         }
         return super.onOptionsItemSelected(item)
     }
