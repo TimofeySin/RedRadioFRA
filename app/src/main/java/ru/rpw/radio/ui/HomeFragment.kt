@@ -184,7 +184,7 @@ class HomeFragment : Fragment() {
                     if (wResponse == null) {
                         setNameOfTrack(getString(R.string.technical_work))
                     } else {
-                        setNameOfTrack("     " + wResponse!!.getSong())
+                        setNameOfTrack("     " + wResponse.getSong())
                     }
                 }
             }
