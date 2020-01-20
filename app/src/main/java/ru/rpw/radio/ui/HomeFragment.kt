@@ -181,7 +181,11 @@ class HomeFragment : Fragment() {
             ) {
                 if (response.code() == 200) {
                     val wResponse = response.body()
-                    setNameOfTrack("     " + wResponse!!.getSong())
+                    if (wResponse == null) {
+                        setNameOfTrack(getString(R.string.technical_work))
+                    } else {
+                        setNameOfTrack("     " + wResponse!!.getSong())
+                    }
                 }
             }
 
