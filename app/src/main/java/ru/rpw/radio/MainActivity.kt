@@ -49,7 +49,7 @@ class MainActivity : AppCompatActivity() {
             if (SingletonMediaPlayer.isPlaying()) {
                 SingletonMediaPlayer.pauseMediaPlayer()
             } else {
-                SingletonMediaPlayer.recoverStatusPlayer()
+                SingletonMediaPlayer.playMediaPlayer()
             }
         }
         return super.onKeyDown(keyCode, event)

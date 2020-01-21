@@ -1,13 +1,16 @@
 package ru.rpw.radio
 
+import android.content.Context
 import android.media.MediaPlayer
+import android.net.wifi.WifiManager
+import android.os.PowerManager
+
 
 object SingletonMediaPlayer {
 
-    private var mediaDone = false
     private var mMedia: MediaPlayer? = null
     private var stream = "https://myradio24.org/zuek1917"
-    private var lastStatusPlay = false
+    var state = StatePlayer.NOTREADY
 
     init {
         if (mMedia == null) {
@@ -23,20 +26,41 @@ object SingletonMediaPlayer {
         }
     }
 
+    fun prepareAsync() {
+        mMedia = null
+        mMedia = MediaPlayer()
+        initMediaPlayer()
+        mMedia?.setOnPreparedListener {
+            mMedia?.let {
+                it.start()
+                state = StatePlayer.PLAY
+            }
+        }
+    }
+
+    fun setWakeMode(context: Context, lock: Boolean) {
+        val wm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
+        val wifiLock = wm.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "MyWifiLock")
+
+        if (lock) {
+            mMedia?.let {
+                it.setWakeMode(context, PowerManager.PARTIAL_WAKE_LOCK)
+
+                wifiLock.acquire()
+            }
+        } else {
+            if (wifiLock.isHeld) {
+                wifiLock.release()
+            }
+        }
+    }
+
     fun isPlaying(): Boolean {
-        mMedia?.let { return it.isPlaying } ?: run { return false }
+        return state == StatePlayer.PLAY
     }
 
     fun getMediaPlayer(): MediaPlayer {
         return mMedia!!
-    }
-
-    fun getMediaDone(): Boolean {
-        return mediaDone
-    }
-
-    fun setMediaDone(newValue: Boolean) {
-        mediaDone = newValue
     }
 
     fun setVolume(value: Float) {
@@ -47,14 +71,20 @@ object SingletonMediaPlayer {
         mMedia?.let {
             if (it.isPlaying) {
                 it.pause()
-                lastStatusPlay = true
+                state = StatePlayer.PAUSE
             }
         }
     }
 
-    fun recoverStatusPlayer() {
-        if (lastStatusPlay) {
+    fun playMediaPlayer() {
+        if (state == StatePlayer.PAUSE) {
             mMedia?.start()
+            state = StatePlayer.PLAY
         }
     }
+
+    enum class StatePlayer {
+        PAUSE, RESET, NOTREADY, READY, PLAY
+    }
+
 }

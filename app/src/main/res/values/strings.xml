@@ -40,7 +40,8 @@
     <string name="menu_about">О приложении</string>
     <string name="rpr_logo">Логотип Рабочей партии России</string>
     <string name="play_button">PLAY</string>
-
+    <string name="pause_button">PAUSE</string>
+    <string name="stop_button">STOP</string>
     <string name="about_contact">Информационные ресурсы:</string>
     <string name="about_responsible">Ответственные:</string>
 

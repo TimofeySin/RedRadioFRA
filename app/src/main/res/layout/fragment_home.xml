@@ -93,15 +93,65 @@
         android:layout_weight="9"
         android:background="@drawable/fon_wood">
 
-        <ImageView
-            android:id="@+id/controlPlayerButton"
-            android:layout_width="match_parent"
+        <LinearLayout
+            android:baselineAligned="false"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:contentDescription="@string/play_button"
-            android:padding="@dimen/activity_horizontal_margin"
+            android:layout_gravity="center|center_horizontal|center_vertical"
+            android:orientation="horizontal">
 
-            app:srcCompat="@drawable/ic_play_button"
-            tools:visibility="visible" />
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:id="@+id/imagePlayButton"
+                    android:layout_width="132dp"
+                    android:layout_height="match_parent"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/play_button"
+                    android:scaleType="fitCenter"
+                    app:srcCompat="@drawable/ic_play_button" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar"
+                    style="?android:attr/progressBarStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" />
+
+            </FrameLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:id="@+id/imagePauseButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/pause_button"
+                    app:srcCompat="@drawable/ic_pause_button"
+                    tools:visibility="visible" />
+
+                <ImageButton
+                    android:id="@+id/imageStopButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/stop_button"
+                    app:srcCompat="@drawable/ic_stop_button"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </FrameLayout>
 
