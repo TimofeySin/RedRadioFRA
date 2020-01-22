@@ -63,11 +63,13 @@ class HomeFragment : Fragment() {
         val currentOrientation = resources.configuration.orientation
         if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE) {
             root.main_layout.orientation = LinearLayout.HORIZONTAL
+            root.buttonLinearLayout.orientation = LinearLayout.VERTICAL
             params.height = ViewGroup.LayoutParams.MATCH_PARENT
             params.width = 10
             initChangeLogo(root, mediaState)
         } else {
             root.main_layout.orientation = LinearLayout.VERTICAL
+            root.buttonLinearLayout.orientation = LinearLayout.HORIZONTAL
             params.height = 10
             params.width = ViewGroup.LayoutParams.MATCH_PARENT
             initChangeLogo(root, mediaState)
@@ -90,6 +92,7 @@ class HomeFragment : Fragment() {
                     )
                     root.imageLogoFonHome.startAnimation(animationUP)
                 }
+
                 override fun onAnimationStart(animation: Animation?) {}
             })
             root.imageLogoFonHome.startAnimation(animationDown)
@@ -116,26 +119,20 @@ class HomeFragment : Fragment() {
         setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.READY)
         viewButtonMediaPlayer(root, mModelMedia)
         root.imagePlayButton.setOnClickListener {
-            mModelMedia.setWakeMode(root.context,true)
+            mModelMedia.setWakeMode(root.context, true)
             if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PAUSE || mModelMedia.state == SingletonMediaPlayer.StatePlayer.READY) {
                 mModelMedia.getMediaPlayer().start()
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.PLAY
                 viewButtonMediaPlayer(root, mModelMedia)
-            } else if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.RESET) {
-                mModelMedia.state = SingletonMediaPlayer.StatePlayer.NOTREADY
-
-                mModelMedia.prepareAsync()
-                setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.PLAY)
-                viewButtonMediaPlayer(root, mModelMedia)
-            }
-        }
-        root.imagePauseButton.setOnClickListener {
-
-            if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PLAY) {
+            } else if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PLAY) {
                 mModelMedia.getMediaPlayer().pause()
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.PAUSE
                 viewButtonMediaPlayer(root, mModelMedia)
-                mModelMedia.setWakeMode(root.context,false)
+            } else if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.RESET) {
+                mModelMedia.state = SingletonMediaPlayer.StatePlayer.NOTREADY
+                mModelMedia.prepareAsync()
+                setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.PLAY)
+                viewButtonMediaPlayer(root, mModelMedia)
             }
         }
         root.imageStopButton.setOnClickListener {
@@ -144,7 +141,7 @@ class HomeFragment : Fragment() {
                 mModelMedia.getMediaPlayer().release()
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.RESET
                 viewButtonMediaPlayer(root, mModelMedia)
-                mModelMedia.setWakeMode(root.context,false)
+                mModelMedia.setWakeMode(root.context, false)
             }
         }
     }
@@ -153,33 +150,32 @@ class HomeFragment : Fragment() {
         val transpAlfa = 0.5f
         when (mModelMedia.state) {
             SingletonMediaPlayer.StatePlayer.PLAY -> {
-                root.imagePauseButton.alpha = 1f
                 root.imageStopButton.alpha = 1f
-                root.imagePlayButton.alpha = transpAlfa
+                root.imagePlayButton.alpha = 1f
+                root.imagePlayButton.setImageResource(R.drawable.ic_pause_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
             }
             SingletonMediaPlayer.StatePlayer.PAUSE -> {
-                root.imagePauseButton.alpha = transpAlfa
                 root.imageStopButton.alpha = 1f
                 root.imagePlayButton.alpha = 1f
+                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
             }
             SingletonMediaPlayer.StatePlayer.RESET -> {
-                root.imagePauseButton.alpha = transpAlfa
                 root.imageStopButton.alpha = transpAlfa
-                root.imagePlayButton.alpha = 1f
+                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
             }
             SingletonMediaPlayer.StatePlayer.NOTREADY -> {
-                root.imagePauseButton.alpha = transpAlfa
                 root.imageStopButton.alpha = transpAlfa
                 root.imagePlayButton.alpha = transpAlfa
+                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.VISIBLE
             }
             SingletonMediaPlayer.StatePlayer.READY -> {
-                root.imagePauseButton.alpha = transpAlfa
                 root.imageStopButton.alpha = transpAlfa
                 root.imagePlayButton.alpha = 1f
+                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
             }
         }
@@ -188,10 +184,10 @@ class HomeFragment : Fragment() {
 
     //region Name play track
     private fun setNameOfTrack(text: String) {
-        this.view?.let {
-            if (text != it.trackInfo.text) {
-                it.trackInfo.text = text
-                it.trackInfo.isSelected = true
+        this.view?.trackInfo?.let {
+            if (text != it.text) {
+                it.text = text
+                it.isSelected = true
             }
         }
     }

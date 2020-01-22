@@ -85,20 +85,29 @@
         android:id="@+id/viewBorder"
         android:layout_width="match_parent"
         android:layout_height="10dp"
-        android:background="@color/borderHome" />
+        android:background="@color/borderHome"
+        android:visibility="visible" />
 
-    <FrameLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="9"
-        android:background="@drawable/fon_wood">
+        android:background="@drawable/fon_wood"
+        android:orientation="horizontal">
+
 
         <LinearLayout
-            android:baselineAligned="false"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center|center_horizontal|center_vertical"
-            android:orientation="horizontal">
+            android:id="@+id/buttonLinearLayout"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_max="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="200dp">
 
             <FrameLayout
                 android:layout_width="match_parent"
@@ -107,52 +116,35 @@
 
                 <ImageButton
                     android:id="@+id/imagePlayButton"
-                    android:layout_width="132dp"
+                    android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/play_button"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/ic_play_button" />
+                    tools:src="@drawable/ic_play_button" />
 
                 <ProgressBar
                     android:id="@+id/progressBar"
-                    style="?android:attr/progressBarStyle"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent" />
 
             </FrameLayout>
 
-
-            <LinearLayout
+            <ImageButton
+                android:id="@+id/imageStopButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="3"
-                android:orientation="vertical">
-
-                <ImageButton
-                    android:id="@+id/imagePauseButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/pause_button"
-                    app:srcCompat="@drawable/ic_pause_button"
-                    tools:visibility="visible" />
-
-                <ImageButton
-                    android:id="@+id/imageStopButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/stop_button"
-                    app:srcCompat="@drawable/ic_stop_button"
-                    tools:visibility="visible" />
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/stop_button"
+                android:scaleType="fitCenter"
+                android:scaleX="0.75"
+                android:scaleY="0.75"
+                app:srcCompat="@drawable/ic_stop_button" />
 
         </LinearLayout>
 
-    </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
