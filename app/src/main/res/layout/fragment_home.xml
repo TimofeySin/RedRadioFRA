@@ -39,8 +39,9 @@
                 <TextView
                     android:id="@+id/generalTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
+                    android:layout_height="100dp"
                     android:fontFamily="@font/roboto"
+                    android:maxLines="2"
                     android:padding="@dimen/fab_margin"
                     android:singleLine="false"
                     android:text="@string/nav_header_title"
