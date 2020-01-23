@@ -39,8 +39,7 @@
                 <TextView
                     android:id="@+id/generalTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:layout_weight="1"
+                    android:layout_height="150dp"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/fab_margin"
                     android:singleLine="false"
@@ -53,7 +52,6 @@
                     android:id="@+id/generalTitle2"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
-                    android:layout_weight="1"
                     android:fontFamily="@font/roboto"
                     android:padding="@dimen/fab_margin"
                     android:singleLine="false"
@@ -66,10 +64,21 @@
             </LinearLayout>
 
             <TextView
+                android:id="@+id/airRec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:fontFamily="@font/roboto"
+                android:gravity="bottom"
+                android:textAlignment="center"
+                android:textColor="@color/textForNav"
+                android:textSize="30sp" />
+
+            <TextView
                 android:id="@+id/trackInfo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_weight="2"
                 android:ellipsize="marquee"
                 android:fontFamily="@font/roboto"
                 android:gravity="bottom"
@@ -138,8 +147,8 @@
                 android:background="@android:color/transparent"
                 android:contentDescription="@string/stop_button"
                 android:scaleType="fitCenter"
-                android:scaleX="0.75"
-                android:scaleY="0.75"
+                android:scaleX="0.65"
+                android:scaleY="0.65"
                 app:srcCompat="@drawable/ic_stop_button" />
 
         </LinearLayout>
