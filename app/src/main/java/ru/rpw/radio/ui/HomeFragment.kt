@@ -26,7 +26,6 @@ import ru.rpw.radio.SingletonMediaPlayer
 
 import java.util.*
 
-
 class HomeFragment : Fragment() {
 
     override fun onCreateView(
@@ -40,9 +39,7 @@ class HomeFragment : Fragment() {
 
         val mModelMedia = SingletonMediaPlayer
 
-
         changeOrientation(root, mModelMedia.state)
-
         initControlMediaPlayer(root, mModelMedia)
         initUpdateNameOfTrack(1000)
 
@@ -74,6 +71,7 @@ class HomeFragment : Fragment() {
             params.width = ViewGroup.LayoutParams.MATCH_PARENT
             initChangeLogo(root, mediaState)
         }
+
     }
 
     private fun initChangeLogo(root: View, mediaState: SingletonMediaPlayer.StatePlayer) {
@@ -100,6 +98,7 @@ class HomeFragment : Fragment() {
     }
 
     //region Init MediaPlayer
+
     private fun setListenerOnMediaPlayer(
         root: View,
         mModelMedia: SingletonMediaPlayer,
@@ -108,7 +107,7 @@ class HomeFragment : Fragment() {
         mModelMedia.getMediaPlayer().setOnPreparedListener {
             mModelMedia.state = nextState
             initChangeLogo(root, mModelMedia.state)
-            viewButtonMediaPlayer(root, mModelMedia)
+            viewButtonMediaPlayer(root, mModelMedia.state)
             if (nextState == SingletonMediaPlayer.StatePlayer.PLAY) {
                 mModelMedia.getMediaPlayer().start()
             }
@@ -117,74 +116,81 @@ class HomeFragment : Fragment() {
 
     private fun initControlMediaPlayer(root: View, mModelMedia: SingletonMediaPlayer) {
         setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.READY)
-        viewButtonMediaPlayer(root, mModelMedia)
+        viewButtonMediaPlayer(root, mModelMedia.state)
         root.imagePlayButton.setOnClickListener {
             mModelMedia.setWakeMode(root.context, true)
             if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PAUSE || mModelMedia.state == SingletonMediaPlayer.StatePlayer.READY) {
                 mModelMedia.getMediaPlayer().start()
-                setAirRecText("")
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.PLAY
-                viewButtonMediaPlayer(root, mModelMedia)
+                viewButtonMediaPlayer(root, mModelMedia.state)
             } else if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PLAY) {
                 mModelMedia.getMediaPlayer().pause()
-                setAirRecText(getString(R.string.air_rec))
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.PAUSE
-                viewButtonMediaPlayer(root, mModelMedia)
+                viewButtonMediaPlayer(root, mModelMedia.state)
             } else if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.RESET) {
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.NOTREADY
-                setAirRecText("")
                 mModelMedia.prepareAsync()
                 setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.PLAY)
-                viewButtonMediaPlayer(root, mModelMedia)
+                viewButtonMediaPlayer(root, mModelMedia.state)
             }
         }
         root.imageStopButton.setOnClickListener {
             if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PLAY || mModelMedia.state == SingletonMediaPlayer.StatePlayer.PAUSE) {
                 mModelMedia.getMediaPlayer().reset()
-                setAirRecText("")
+
                 mModelMedia.getMediaPlayer().release()
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.RESET
-                viewButtonMediaPlayer(root, mModelMedia)
+                viewButtonMediaPlayer(root, mModelMedia.state)
                 mModelMedia.setWakeMode(root.context, false)
             }
         }
     }
 
-    private fun viewButtonMediaPlayer(root: View, mModelMedia: SingletonMediaPlayer) {
+    private fun viewButtonMediaPlayer(root: View, mediaState: SingletonMediaPlayer.StatePlayer) {
         val transpAlfa = 0.5f
-        when (mModelMedia.state) {
+        when (mediaState) {
             SingletonMediaPlayer.StatePlayer.PLAY -> {
                 root.imageStopButton.alpha = 1f
                 root.imagePlayButton.alpha = 1f
                 root.imagePlayButton.setImageResource(R.drawable.ic_pause_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
+                setAirRecText("")
             }
             SingletonMediaPlayer.StatePlayer.PAUSE -> {
                 root.imageStopButton.alpha = 1f
                 root.imagePlayButton.alpha = 1f
                 root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
+                setAirRecText(getString(R.string.air_rec))
             }
             SingletonMediaPlayer.StatePlayer.RESET -> {
                 root.imageStopButton.alpha = transpAlfa
                 root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
+                setAirRecText("")
             }
             SingletonMediaPlayer.StatePlayer.NOTREADY -> {
                 root.imageStopButton.alpha = transpAlfa
                 root.imagePlayButton.alpha = transpAlfa
                 root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.VISIBLE
+                setAirRecText("")
             }
             SingletonMediaPlayer.StatePlayer.READY -> {
                 root.imageStopButton.alpha = transpAlfa
                 root.imagePlayButton.alpha = 1f
                 root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
                 root.progressBar.visibility = ProgressBar.INVISIBLE
+                setAirRecText("")
             }
         }
     }
     //endregion
+
+    override fun onResume() {
+        this.view?.let { viewButtonMediaPlayer(it,  SingletonMediaPlayer.state) }
+        super.onResume()
+    }
 
     //region Name play track
     private fun setNameOfTrack(text: String) {
@@ -195,6 +201,7 @@ class HomeFragment : Fragment() {
             }
         }
     }
+
     private fun setNameOfTrack(id: Int) {
         this.view?.trackInfo?.let {
             val text = getString(id)
@@ -212,7 +219,6 @@ class HomeFragment : Fragment() {
             }
         }
     }
-
 
     private fun initUpdateNameOfTrack(period: Long) {
         val retrofit = initRetrofit()
@@ -245,7 +251,7 @@ class HomeFragment : Fragment() {
                 if (response.code() == 200) {
                     val wResponse = response.body()
                     if (wResponse == null) {
-                        setNameOfTrack(getString(R.string.technical_work))
+                        setNameOfTrack(R.string.technical_work)
                     } else {
                         setNameOfTrack("     " + wResponse.getSong())
                     }
