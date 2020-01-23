@@ -44,14 +44,14 @@ class HomeFragment : Fragment() {
         changeOrientation(root, mModelMedia.state)
 
         initControlMediaPlayer(root, mModelMedia)
-        initUpdateNameOfTrackRun(1000)
+        initUpdateNameOfTrack(1000)
 
         return root
     }
 
     private fun getRandomBackground(root: View): Drawable? {
         val backgroundList: Array<Int> =
-            arrayOf(R.drawable.gegel, R.drawable.marx, R.drawable.engels, R.drawable.gegel2)
+            arrayOf(R.drawable.gegel, R.drawable.marx, R.drawable.engels, R.drawable.gegel2,R.drawable.lenin)
         val rand = Random()
         val back = backgroundList[rand.nextInt(backgroundList.size)]
 
@@ -122,14 +122,17 @@ class HomeFragment : Fragment() {
             mModelMedia.setWakeMode(root.context, true)
             if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PAUSE || mModelMedia.state == SingletonMediaPlayer.StatePlayer.READY) {
                 mModelMedia.getMediaPlayer().start()
+                setAirRecText("")
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.PLAY
                 viewButtonMediaPlayer(root, mModelMedia)
             } else if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PLAY) {
                 mModelMedia.getMediaPlayer().pause()
+                setAirRecText(getString(R.string.air_rec))
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.PAUSE
                 viewButtonMediaPlayer(root, mModelMedia)
             } else if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.RESET) {
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.NOTREADY
+                setAirRecText("")
                 mModelMedia.prepareAsync()
                 setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.PLAY)
                 viewButtonMediaPlayer(root, mModelMedia)
@@ -138,6 +141,7 @@ class HomeFragment : Fragment() {
         root.imageStopButton.setOnClickListener {
             if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PLAY || mModelMedia.state == SingletonMediaPlayer.StatePlayer.PAUSE) {
                 mModelMedia.getMediaPlayer().reset()
+                setAirRecText("")
                 mModelMedia.getMediaPlayer().release()
                 mModelMedia.state = SingletonMediaPlayer.StatePlayer.RESET
                 viewButtonMediaPlayer(root, mModelMedia)
@@ -192,9 +196,19 @@ class HomeFragment : Fragment() {
         }
     }
 
-    private fun initUpdateNameOfTrackRun(period: Long) {
+    private fun setAirRecText(text: String){
+        this.view?.airRec?.let {
+            if (text != it.text) {
+                it.text = text
+            }
+        }
+    }
+
+
+    private fun initUpdateNameOfTrack(period: Long) {
         val retrofit = initRetrofit()
         val handler = Handler()
+
         val runnable = object : Runnable {
             override fun run() {
                 getNameOfTrack(retrofit)
