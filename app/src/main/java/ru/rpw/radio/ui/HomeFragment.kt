@@ -195,6 +195,15 @@ class HomeFragment : Fragment() {
             }
         }
     }
+    private fun setNameOfTrack(id: Int) {
+        this.view?.trackInfo?.let {
+            val text = getString(id)
+            if (text != it.text) {
+                it.text = text
+                it.isSelected = true
+            }
+        }
+    }
 
     private fun setAirRecText(text: String){
         this.view?.airRec?.let {
@@ -244,7 +253,7 @@ class HomeFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<DataModelStatus>, t: Throwable) {
-                setNameOfTrack(getString(R.string.error_retrofit))
+                setNameOfTrack(R.string.error_retrofit)
             }
         })
 
