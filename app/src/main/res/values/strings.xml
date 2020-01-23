@@ -60,4 +60,6 @@
     <string name="stream_url">https://myradio24.com/</string>
     <string name="technical_work">Технические работы</string>
 
+    <string name="air_rec">Запись эфира радио…</string>
+
 </resources>
