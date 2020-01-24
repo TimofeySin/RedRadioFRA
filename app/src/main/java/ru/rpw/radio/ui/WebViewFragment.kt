@@ -38,6 +38,8 @@ class WebViewFragment : Fragment() {
             when (getSharedPreference(mainWebView.context, "AppForOpenURL")) {
                 "APP" -> {
                     mainWebView.webViewClient = WebViewClient()
+                    mainWebView.settings.javaScriptEnabled = true
+                    mainWebView.settings.allowFileAccess = true
                 }
                 "CHROME" -> {
                     mainWebView.webChromeClient = WebChromeClient()
