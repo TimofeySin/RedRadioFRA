@@ -62,4 +62,10 @@
 
     <string name="air_rec">Запись эфира радио…</string>
 
+    <string name="setting">Настройки</string>
+
+    <string name="surfing_in_app">Использовать браузер приложения</string>
+    <string name="surfing_in_chrome">Использовать браузер по умолчанию</string>
+
+
 </resources>
