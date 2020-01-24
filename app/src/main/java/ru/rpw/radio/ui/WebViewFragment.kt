@@ -44,6 +44,11 @@ class WebViewFragment : Fragment() {
                 "CHROME" -> {
                     mainWebView.webChromeClient = WebChromeClient()
                 }
+                "NULL" -> {
+                    mainWebView.webViewClient = WebViewClient()
+                    mainWebView.settings.javaScriptEnabled = true
+                    mainWebView.settings.allowFileAccess = true
+                }
             }
         }
     }
