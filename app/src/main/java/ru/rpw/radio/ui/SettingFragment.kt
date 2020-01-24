@@ -28,10 +28,10 @@ class SettingFragment : Fragment() {
     private fun checkedRightRadio(root: View){
         when(getSharedPreference(root.context, "AppForOpenURL")){
             "APP" ->{
-                root.radioButtonInAPP.isChecked =true
+                root.radioButtonInAPP.isChecked  = true
             }
             "CHROME" ->{
-                root.radioButtonInChrome.isChecked =true
+                root.radioButtonInChrome.isChecked = true
             }
         }
     }
