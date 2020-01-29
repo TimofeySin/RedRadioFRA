@@ -83,6 +83,15 @@ object SingletonMediaPlayer {
         }
     }
 
+    fun stopMediaPlayer() {
+        mMedia?.let {
+            it.reset()
+            it.release()
+            state = StatePlayer.NOTREADY
+        }
+
+    }
+
     enum class StatePlayer {
         PAUSE, RESET, NOTREADY, READY, PLAY
     }

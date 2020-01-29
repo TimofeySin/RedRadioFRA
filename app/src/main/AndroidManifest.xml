@@ -8,6 +8,8 @@
     <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <permission android:name="android.permission.MEDIA_CONTENT_CONTROL" />
+
 
     <application
         android:fullBackupContent="true"
@@ -36,6 +38,11 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".AlertDetails">
+            <intent-filter>
+                <action android:name="redRadioControl" />
             </intent-filter>
         </receiver>
         <meta-data

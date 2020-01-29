@@ -19,6 +19,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
 
+
 class MainActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -42,14 +43,15 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         checkManifestPermission()
+        ControlPanelMediaPlayer(applicationContext)
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode == KeyEvent.KEYCODE_HEADSETHOOK) {
-            if (SingletonMediaPlayer.isPlaying()) {
-                SingletonMediaPlayer.pauseMediaPlayer()
+            if (MediaPlayerControl().isPlaying) {
+                MediaPlayerControl().pause()
             } else {
-                SingletonMediaPlayer.playMediaPlayer()
+                MediaPlayerControl().start()
             }
         }
         return super.onKeyDown(keyCode, event)
@@ -73,15 +75,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.action_share) {
-            val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.type = "text/plain"
-            shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
-            shareIntent.putExtra(
-                Intent.EXTRA_TEXT,
-                getString(R.string.share_text) + " http://play.google.com/store/apps/details?id=ru.rpw.radio"
-            )
-            startActivity(Intent.createChooser(shareIntent, getString(R.string.menu_nav_red_radio)))
+        when (item.itemId) {
+            R.id.action_share -> {
+                val shareIntent = Intent(Intent.ACTION_SEND)
+                shareIntent.type = "text/plain"
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.menu_nav_radio))
+                shareIntent.putExtra(
+                    Intent.EXTRA_TEXT,
+                    getString(R.string.share_text) + " http://play.google.com/store/apps/details?id=ru.rpw.radio"
+                )
+                startActivity(
+                    Intent.createChooser(
+                        shareIntent,
+                        getString(R.string.menu_nav_red_radio)
+                    )
+                )
+            }
         }
         return super.onOptionsItemSelected(item)
     }
