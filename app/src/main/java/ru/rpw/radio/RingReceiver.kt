@@ -10,14 +10,14 @@ class RingReceiver : BroadcastReceiver() {
             if (it.action == "android.intent.action.PHONE_STATE") {
                 when (it.extras?.getString("state")) {
                     "RINGING" -> {
-                        MediaPlayerControl().setMonoVolume(0.4F)
+                        SingletonMediaPlayer.setVolume(0.4F)
                     }
                     "IDLE" -> {
                         //SingletonMediaPlayer.recoverStatusPlayer()
-                        MediaPlayerControl().setMonoVolume(1.0F)
+                        SingletonMediaPlayer.setVolume(1.0F)
                     }
                     "OFFHOOK" -> {
-                        MediaPlayerControl().pause()
+                        SingletonMediaPlayer.playPauseMediaPlayer()
                     }
                 }
             }

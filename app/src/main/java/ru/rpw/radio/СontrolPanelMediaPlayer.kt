@@ -31,23 +31,30 @@ class ControlPanelMediaPlayer(private var context: Context) {
     private fun getPending(value :Int): PendingIntent {
         val intent = Intent(context, AlertDetails::class.java).apply {
             putExtra("redRadioControl", value)
+            putExtra("T", "Test")
+            action = "Value:$value"
         }
-        return PendingIntent.getBroadcast(context, value, intent, 0)
+        return PendingIntent.getBroadcast(context, 0, intent, 0)
     }
 
 
     private fun initNotificationBuilder(): NotificationCompat.Builder? {
 
-        return NotificationCompat.Builder(context, "MM")
+        val mNotification =  NotificationCompat.Builder(context, "MM")
             .setSmallIcon(R.drawable.gegel)
             .setContentTitle(context.getString(R.string.menu_nav_red_radio)+" init")
             .setContentText("Hello World!")
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setStyle(NotificationCompat.BigTextStyle()
                 .bigText("Much longer text that cannot fit one line..."))
-            .addAction(R.drawable.ic_play_button,  "Play", getPending(1))
-            .addAction(R.drawable.ic_pause_button, "Pause",getPending(2))
-            .addAction(R.drawable.ic_stop_button,  "Stop", getPending(3))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+
+            mNotification
+                .addAction(R.drawable.ic_play_button,  "Play", getPending(3))
+                .addAction(R.drawable.ic_pause_button, "Pause",getPending(4))
+                .addAction(R.drawable.ic_stop_button,  "Stop", getPending(5))
+        }
+        return mNotification
     }
 
     private fun createNotificationChannel() {
