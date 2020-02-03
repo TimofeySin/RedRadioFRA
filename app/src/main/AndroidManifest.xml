@@ -33,18 +33,16 @@
             </intent-filter>
         </activity>
         <receiver
-            android:name=".RingReceiver"
+            android:name=".Receiver"
             android:enabled="true"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE"/>
+                <action android:name="redRadio.intent.action.PLAY"/>
+                <action android:name="redRadio.intent.action.STOP"/>
             </intent-filter>
         </receiver>
-        <receiver android:name=".AlertDetails">
-            <intent-filter>
-                <action android:name="redRadioControl" />
-            </intent-filter>
-        </receiver>
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

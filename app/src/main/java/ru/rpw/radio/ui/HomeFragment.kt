@@ -1,8 +1,6 @@
 package ru.rpw.radio.ui
 
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
+import android.annotation.SuppressLint
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -13,7 +11,6 @@ import android.view.ViewGroup
 import android.view.animation.Animation
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
-import android.widget.ProgressBar
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.fragment_home.view.*
@@ -109,102 +106,60 @@ open class HomeFragment : Fragment()   {
 
     //region Init MediaPlayer
 
-    private fun setListenerOnMediaPlayer(
-        root: View,
-        mModelMedia: SingletonMediaPlayer,
-        nextState: SingletonMediaPlayer.StatePlayer
-    ) {
-        mModelMedia.mMedia.setOnPreparedListener {
-            mModelMedia.state = nextState
-            initChangeLogo(root, mModelMedia.state)
-            viewButtonMediaPlayer(root, mModelMedia.state)
-            if (nextState == SingletonMediaPlayer.StatePlayer.PLAY) {
-                mModelMedia.playPauseMediaPlayer()
-            }
-        }
-    }
+//    private fun setListenerOnMediaPlayer(
+//        root: View,
+//        mModelMedia: SingletonMediaPlayer,
+//        nextState: SingletonMediaPlayer.StatePlayer
+//    ) {
+//        mModelMedia.mMedia.setOnPreparedListener {
+//            mModelMedia.state = nextState
+//            initChangeLogo(root, mModelMedia.state)
+//           // viewButtonMediaPlayer(root, mModelMedia.state)
+//            if (nextState == SingletonMediaPlayer.StatePlayer.PLAY) {
+//                mModelMedia.playPauseMediaPlayer()
+//            }
+//        }
+//    }
 
     private fun initControlMediaPlayer(root: View, mModelMedia: SingletonMediaPlayer) {
-        setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.READY)
-        viewButtonMediaPlayer(root, mModelMedia.state)
+        //setListenerOnMediaPlayer(root, mModelMedia, SingletonMediaPlayer.StatePlayer.READY)
         root.imagePlayButton.setOnClickListener {
-            mModelMedia.setWakeMode(root.context, true)
+           // mModelMedia.setWakeMode(root.context, true)
             when (mModelMedia.state) {
                 SingletonMediaPlayer.StatePlayer.PAUSE, SingletonMediaPlayer.StatePlayer.READY, SingletonMediaPlayer.StatePlayer.PLAY, SingletonMediaPlayer.StatePlayer.STOP -> {
                     mModelMedia.playPauseMediaPlayer()
                 }
                 SingletonMediaPlayer.StatePlayer.RESET -> {
                     mModelMedia.prepareAsync()
-                    setListenerOnMediaPlayer(
-                        root,
-                        mModelMedia,
-                        SingletonMediaPlayer.StatePlayer.PLAY
-                    )
+//                    setListenerOnMediaPlayer(
+//                        root,
+//                        mModelMedia,
+//                        SingletonMediaPlayer.StatePlayer.PLAY
+//                    )
                 }
             }
-            viewButtonMediaPlayer(root, mModelMedia.state)
-
         }
         root.imageStopButton.setOnClickListener {
             if (mModelMedia.state == SingletonMediaPlayer.StatePlayer.PLAY || mModelMedia.state == SingletonMediaPlayer.StatePlayer.PAUSE) {
                 mModelMedia.stopMediaPlayer()
-                viewButtonMediaPlayer(root, mModelMedia.state)
-                mModelMedia.setWakeMode(root.context, false)
+                //mModelMedia.setWakeMode(root.context, false)
             }
         }
     }
 
-    private fun viewButtonMediaPlayer(root: View, mediaState: SingletonMediaPlayer.StatePlayer) {
-        val transpAlfa = 0.5f
-        when (mediaState) {
-            SingletonMediaPlayer.StatePlayer.PLAY -> {
-                root.imageStopButton.alpha = 1f
-                root.imagePlayButton.alpha = 1f
-                root.imagePlayButton.setImageResource(R.drawable.ic_pause_button)
-                root.progressBar.visibility = ProgressBar.INVISIBLE
-                setAirRecText("")
-            }
-            SingletonMediaPlayer.StatePlayer.PAUSE -> {
-                root.imageStopButton.alpha = 1f
-                root.imagePlayButton.alpha = 1f
-                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
-                root.progressBar.visibility = ProgressBar.INVISIBLE
-                setAirRecText(getString(R.string.air_rec))
-            }
-            SingletonMediaPlayer.StatePlayer.RESET -> {
-                root.imageStopButton.alpha = transpAlfa
-                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
-                root.progressBar.visibility = ProgressBar.INVISIBLE
-                setAirRecText("")
-            }
-            SingletonMediaPlayer.StatePlayer.NOTREADY,SingletonMediaPlayer.StatePlayer.STOP -> {
-                root.imageStopButton.alpha = transpAlfa
-                root.imagePlayButton.alpha = transpAlfa
-                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
-                root.progressBar.visibility = ProgressBar.VISIBLE
-                setAirRecText("")
-            }
-            SingletonMediaPlayer.StatePlayer.READY -> {
-                root.imageStopButton.alpha = transpAlfa
-                root.imagePlayButton.alpha = 1f
-                root.imagePlayButton.setImageResource(R.drawable.ic_play_button)
-                root.progressBar.visibility = ProgressBar.INVISIBLE
-                setAirRecText("")
-            }
-        }
-    }
     //endregion
 
     override fun onResume() {
-        this.view?.let { viewButtonMediaPlayer(it, SingletonMediaPlayer.state) }
+        SingletonMediaPlayer.viewButtonMediaPlayer()
         super.onResume()
     }
 
     //region Name play track
+
     private fun setNameOfTrack(text: String) {
         this.view?.trackInfo?.let {
             if (text != it.text) {
-                it.text = text
+                it.text = "$text (${SingletonMediaPlayer.kbps} kbps)"
                 it.isSelected = true
             }
         }
@@ -216,14 +171,6 @@ open class HomeFragment : Fragment()   {
             if (text != it.text) {
                 it.text = text
                 it.isSelected = true
-            }
-        }
-    }
-
-    private fun setAirRecText(text: String) {
-        this.view?.airRec?.let {
-            if (text != it.text) {
-                it.text = text
             }
         }
     }
