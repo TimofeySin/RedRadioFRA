@@ -136,7 +136,7 @@ public final class NotificationHelper implements TransistorKeys {
         NotificationCompat.Builder builder;
         builder = new NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID_PLAYBACK_CHANNEL);
         builder.setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
-        builder.setSmallIcon(R.mipmap.ic_launcher);
+        builder.setSmallIcon(R.drawable.ic_notification_app_icon_white_24dp);
         builder.setLargeIcon(getStationIcon(context, station));
         builder.setContentTitle(station.getStationName());
         builder.setContentText(station.getMetadata());
