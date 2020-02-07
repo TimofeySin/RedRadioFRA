@@ -21,8 +21,10 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.palette.graphics.Palette;
 import androidx.vectordrawable.graphics.drawable.VectorDrawableCompat;
 
@@ -264,7 +266,7 @@ public final class ImageHelper {
 
     /* Return a bitmap for a given resource id of a vector drawable */
     private Bitmap getBitmap(int resource) {
-        VectorDrawableCompat drawable = VectorDrawableCompat.create(mContext.getResources(), resource, null);
+        Drawable drawable = AppCompatResources.getDrawable(mContext, resource);
         if (drawable != null) {
             Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
             Canvas canvas = new Canvas(bitmap);
