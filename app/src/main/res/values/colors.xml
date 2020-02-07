@@ -5,4 +5,28 @@
     <color name="borderHome">#550000</color>
     <color name="textForNav">#FCFAD0</color>
     <color name="textBackgroundAbout">#8A0216</color>
+
+    <color name="player_sheet_background_main">@color/transistor_grey_darker</color>
+    <color name="player_sheet_background_main_border">@color/transistor_grey_darker</color>
+    <color name="player_sheet_text_main">@color/transistor_white</color>
+    <color name="player_sheet_background_details">@color/transistor_grey_dark</color>
+    <color name="player_sheet_text_details">@color/transistor_white</color>
+    <color name="player_button_background">@color/transistor_red</color>
+
+    <color name="transistor_black">#FF000000</color>
+    <color name="transistor_white">#FFFFFFFF</color>
+    <color name="transistor_transparent">#00ffffff</color>
+
+    <!-- COLOR NAMES -->
+    <color name="transistor_grey">#FF5F6368</color>             <!-- Material Design 2: Grey 700 -->
+    <color name="transistor_grey_light">#FFBDC1C6</color>       <!-- Material Design 2: Grey 400 -->
+    <color name="transistor_grey_lighter">#FFD2D6DA</color>
+    <color name="transistor_grey_very_light">#FFF1F3F4</color>  <!-- Material Design 2: Grey 100 -->
+    <color name="transistor_grey_dark">#FF3C4043</color>        <!-- Material Design 2: Grey 800 -->
+    <color name="transistor_grey_darker">#FF17181A</color>
+
+    <color name="transistor_red">#FFDC3D33</color>              <!-- Slightly muted variant of -> Material Design 2: Red 600 -->
+    <color name="transistor_red_light">#FFE15950</color>
+    <color name="transistor_red_dark">#FFCA2D23</color>
+    <color name="transistor_red_darker">#FFAD261E</color>
 </resources>

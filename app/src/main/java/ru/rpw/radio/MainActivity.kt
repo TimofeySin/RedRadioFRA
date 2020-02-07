@@ -3,8 +3,8 @@ package ru.rpw.radio
 import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
-import android.view.KeyEvent
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -18,10 +18,22 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import kotlinx.android.synthetic.main.app_bar_main.*
+import ru.rpw.radio.core.Station
+import ru.rpw.radio.helpers.DialogError
+import ru.rpw.radio.helpers.LogHelper
+import ru.rpw.radio.helpers.StationListHelper
+import ru.rpw.radio.helpers.StorageHelper
+import ru.rpw.radio.helpers.TransistorKeys.KEY_DOWNLOAD_STATION
+import ru.rpw.radio.helpers.TransistorKeys.KEY_DOWNLOAD_STATION_IMAGE
+import java.io.File
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
 
+    private val LOG_TAG = MainActivity::class.java.simpleName
+
     private lateinit var appBarConfiguration: AppBarConfiguration
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,17 +54,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         checkManifestPermission()
-    }
-
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_HEADSETHOOK) {
-            if (SingletonMediaPlayer.isPlaying()) {
-                SingletonMediaPlayer.pauseMediaPlayer()
-            } else {
-                SingletonMediaPlayer.playMediaPlayer()
-            }
-        }
-        return super.onKeyDown(keyCode, event)
     }
 
     private fun checkManifestPermission() {
@@ -90,5 +91,4 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 }

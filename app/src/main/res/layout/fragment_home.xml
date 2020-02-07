@@ -114,44 +114,19 @@
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHeight_max="200dp"
+            app:layout_constraintHeight_max="150dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_max="200dp">
-
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1">
-
-                <ImageButton
-                    android:id="@+id/imagePlayButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/play_button"
-                    android:scaleType="fitCenter"
-                    tools:src="@drawable/ic_play_button" />
-
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-            </FrameLayout>
+            app:layout_constraintWidth_max="150dp">
 
             <ImageButton
-                android:id="@+id/imageStopButton"
+                android:id="@+id/imagePlayButton"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:background="@android:color/transparent"
-                android:contentDescription="@string/stop_button"
+                android:contentDescription="@string/play_button"
                 android:scaleType="fitCenter"
-                android:scaleX="0.65"
-                android:scaleY="0.65"
-                app:srcCompat="@drawable/ic_stop_button" />
-
+                tools:src="@drawable/ic_play_button" />
         </LinearLayout>
 
 
