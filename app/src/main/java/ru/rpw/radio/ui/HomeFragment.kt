@@ -1,13 +1,18 @@
 package ru.rpw.radio.ui
 
 import android.app.Activity
+import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.media.AudioManager
 import android.net.Uri
-import android.os.*
+import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.os.Vibrator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +21,13 @@ import android.view.animation.Animation.AnimationListener
 import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.content.res.AppCompatResources.getDrawable
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import kotlinx.android.synthetic.main.fragment_home.*
 import kotlinx.android.synthetic.main.fragment_home.view.*
 import retrofit2.Call
@@ -29,11 +39,12 @@ import ru.rpw.radio.DataModelStatus
 import ru.rpw.radio.PlayerService
 import ru.rpw.radio.R
 import ru.rpw.radio.RetrofitServer
+import ru.rpw.radio.collection.CollectionViewModel
 import ru.rpw.radio.core.Station
 import ru.rpw.radio.helpers.LogHelper
+import ru.rpw.radio.helpers.StationListHelper
 import ru.rpw.radio.helpers.StorageHelper
 import ru.rpw.radio.helpers.TransistorKeys.*
-import java.io.File
 import java.net.URL
 import java.util.*
 
@@ -45,6 +56,9 @@ class HomeFragment : Fragment() {
     private lateinit var mActivity: Activity
     private var mCurrentStation: Station? = null
     private var mPlayerServiceStation: Station? = null
+    private var mCollectionViewModel: CollectionViewModel? = null
+    private var mPlaybackStateChangedReceiver: BroadcastReceiver? = null
+    private var mMetadataChangedReceiver: BroadcastReceiver? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -79,9 +93,18 @@ class HomeFragment : Fragment() {
                 setupPlayer(mCurrentStation!!)
                 animatePlaybackButtonStateTransition(mCurrentStation!!)
                 initPlayButtonListener()
+                // observe changes in LiveData
+                mCollectionViewModel = ViewModelProviders.of((mActivity as AppCompatActivity)).get(
+                    CollectionViewModel::class.java
+                )
+
+                mCollectionViewModel!!.playerServiceStation
+                    .observe(mActivity as LifecycleOwner, createStationObserver())
             }
         }
         thread.start()
+
+
     }
 
     override fun onResume() {
@@ -95,6 +118,12 @@ class HomeFragment : Fragment() {
         if (ACTION_SHOW_PLAYER == intent.action) {
             handleShowPlayer(intent)
         }
+        initializeBroadcastReceivers()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        unregisterBroadcastReceivers(requireContext())
     }
 
     private fun getRandomBackground(root: View): Drawable? {
@@ -344,5 +373,110 @@ class HomeFragment : Fragment() {
             mCurrentStation = station
             setupStationPlaybackButtonState(station)
         }
+    }
+
+    /* Creates an observer for station from player service stored as LiveData */
+    private fun createStationObserver(): Observer<Station?> {
+        return Observer { newStation ->
+            // check if the station currently selected has been changed
+            if (mCurrentStation != null && newStation != null &&
+                mCurrentStation!!.streamUri.equals(newStation.streamUri)
+            ) {
+                val newName = newStation.stationName
+                val newMetaData = newStation.metadata
+                val oldName = mCurrentStation!!.stationName
+                val oldMetaData = mCurrentStation!!.metadata
+                // CASE: PLAYBACK STATE
+                if (mCurrentStation!!.playbackState != newStation.playbackState) {
+                    animatePlaybackButtonStateTransition(newStation)
+                }
+                // update this station
+                mCurrentStation = newStation
+            }
+            // check if the station currently used by player service has been changed
+            if (mPlayerServiceStation != null && newStation != null &&
+                mPlayerServiceStation!!.streamUri.equals(newStation.streamUri)
+            ) { // stop sleep timer - if necessary
+                // update station currently used by player service
+                mPlayerServiceStation = newStation
+            }
+        }
+    }
+
+    /* Initializes and registers broadcast receivers */
+    private fun initializeBroadcastReceivers() { // RECEIVER: state of playback has changed
+        mPlaybackStateChangedReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent.hasExtra(EXTRA_STATION)) {
+                    handlePlaybackStateChange(intent)
+                } else if (intent.hasExtra(EXTRA_ERROR_OCCURRED) && intent.getBooleanExtra(
+                        EXTRA_ERROR_OCCURRED,
+                        false
+                    )
+                ) {
+                    handlePlaybackStateError(intent)
+                }
+            }
+        }
+        val playbackStateChangedIntentFilter =
+            IntentFilter(ACTION_PLAYBACK_STATE_CHANGED)
+        LocalBroadcastManager.getInstance(mActivity)
+            .registerReceiver(mPlaybackStateChangedReceiver!!, playbackStateChangedIntentFilter)
+        // RECEIVER: station metadata has changed
+        mMetadataChangedReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context, intent: Intent) {
+                if (intent.hasExtra(EXTRA_STATION)) {
+                    handleMetadataChange(intent)
+                }
+            }
+        }
+        val metadataChangedIntentFilter = IntentFilter(ACTION_METADATA_CHANGED)
+        LocalBroadcastManager.getInstance(mActivity)
+            .registerReceiver(mMetadataChangedReceiver!!, metadataChangedIntentFilter)
+    }
+
+
+    /* Unregisters broadcast receivers */
+    fun unregisterBroadcastReceivers(context: Context?) {
+        LocalBroadcastManager.getInstance(context!!)
+            .unregisterReceiver(mPlaybackStateChangedReceiver!!)
+        LocalBroadcastManager.getInstance(context).unregisterReceiver(mMetadataChangedReceiver!!)
+        LogHelper.v(LOG_TAG, "Unregistered broadcast receivers in adapter")
+    }
+
+    /* handles changes in metadata */
+    private fun handleMetadataChange(intent: Intent) { // get new station from intent
+        val station: Station
+        station = if (intent.hasExtra(EXTRA_STATION)) {
+            intent.getParcelableExtra(EXTRA_STATION)
+        } else {
+            return
+        }
+        // create copies of station and of main list of stations
+        val newStation = Station(station)
+        // update liva data station from PlayerService - used in PlayerFragment
+        mCollectionViewModel!!.playerServiceStation.setValue(newStation)
+    }
+
+
+    /* handles changes in playback state */
+    private fun handlePlaybackStateChange(intent: Intent) { // get new station from intent
+        val station: Station
+        station = if (intent.hasExtra(EXTRA_STATION)) {
+            intent.getParcelableExtra(EXTRA_STATION)
+        } else {
+            return
+        }
+        // create copies of station and of main list of stations
+        val newStation = Station(station)
+        // try to set playback state of previous station
+
+        // update liva data station from PlayerService - used in PlayerFragment
+        mCollectionViewModel!!.playerServiceStation.value = newStation
+    }
+
+    /* Handles a playback state error that can occur when Transistor crashes during playback */
+    private fun handlePlaybackStateError(intent: Intent) {
+        LogHelper.e(LOG_TAG,"Forcing a reload of station list. Did Transistor crash?")
     }
 }
