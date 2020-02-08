@@ -6,45 +6,79 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.support.v4.media.session.PlaybackStateCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getColor
+import androidx.media.session.MediaButtonReceiver
+import kotlin.math.roundToInt
 
-class ControlPanelMediaPlayer(private var context: Context) {
+class ControlPanelMediaPlayer(private var context: Context, mMedia: SingletonMediaPlayer) {
+
+    private val tagNotification = (Math.random() * 9999).roundToInt()
+
 
     init {
-        createNotification()
+        createNotification(mMedia)
     }
 
-    private fun createNotification() {
-        val builder = initNotificationBuilder()
+    private fun createNotification(mMedia: SingletonMediaPlayer) {
+        val builder = initNotificationBuilder(mMedia)
         createNotificationChannel()
         with(NotificationManagerCompat.from(context)) {
-            notify(1, builder!!.build())
+            notify(tagNotification, builder!!.build())
         }
     }
 
-    private fun getPending(value :Int): PendingIntent {
-        val intent = Intent(context, Receiver::class.java).apply {
-            when (value){
-                  1->{action = "redRadio.intent.action.PLAY"}
-                  2->{action = "redRadio.intent.action.STOP"}
-            }
-        }
-        return PendingIntent.getBroadcast(context, 0, intent, 0)
-    }
+    private fun initNotificationBuilder(mMedia: SingletonMediaPlayer): NotificationCompat.Builder? {
+        val mNotification = NotificationCompat.Builder(context, "MM")
+            .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+            .setOnlyAlertOnce(true)
+            .setColor(getColor(context, R.color.textForNav))
 
-    private fun initNotificationBuilder(): NotificationCompat.Builder? {
-        val mNotification =  NotificationCompat.Builder(context, "MM")
             .setSmallIcon(R.drawable.big_logo)
             .setContentTitle(context.getString(R.string.menu_nav_red_radio))
             .setContentText("Hello World!")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setStyle(NotificationCompat.BigTextStyle()
-                .bigText("Much longer text that cannot fit one line..."))
+            .setPriority(NotificationCompat.PRIORITY_LOW)
+
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            mNotification
-                .addAction(R.drawable.ic_play_button,  "Play", getPending(1))
-                .addAction(R.drawable.ic_stop_button,  "Stop", getPending(2))
+
+            when (mMedia.state) {
+                SingletonMediaPlayer.StatePlayer.PLAY -> mNotification.addAction(
+                    R.drawable.ic_pause_button,
+                    "Pause",
+                    MediaButtonReceiver.buildMediaButtonPendingIntent(
+                        context,
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE
+                    )
+                )
+                SingletonMediaPlayer.StatePlayer.PAUSE -> mNotification.addAction(
+                    R.drawable.ic_play_button,
+                    "Play",
+                    MediaButtonReceiver.buildMediaButtonPendingIntent(
+                        context,
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE
+                    )
+
+                )
+                else -> mNotification.addAction(
+                    R.drawable.ic_play_button,
+                    "Play",
+                    MediaButtonReceiver.buildMediaButtonPendingIntent(
+                        context,
+                        PlaybackStateCompat.ACTION_PLAY_PAUSE
+                    )
+                )
+            }
+            mNotification.addAction(
+                R.drawable.ic_stop_button,
+                "Stop",
+                MediaButtonReceiver.buildMediaButtonPendingIntent(
+                    context,
+                    PlaybackStateCompat.ACTION_STOP
+                )
+            )
         }
         return mNotification
     }
@@ -52,12 +86,10 @@ class ControlPanelMediaPlayer(private var context: Context) {
     private fun createNotificationChannel() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name = context.getString(R.string.menu_nav_red_radio)+" Channel"
-           // val descriptionText = "Name descriptionText"
+            val name = context.getString(R.string.menu_nav_red_radio) + " Channel"
             val importance = NotificationManager.IMPORTANCE_HIGH
-
             val channel = NotificationChannel("MM", name, importance).apply {
-              //  description = descriptionText
+
             }
             // Register the channel with the system
             val notificationManager: NotificationManager =
@@ -65,9 +97,4 @@ class ControlPanelMediaPlayer(private var context: Context) {
             notificationManager.createNotificationChannel(channel)
         }
     }
-
-
-
-
-
 }

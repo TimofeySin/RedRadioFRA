@@ -1,29 +1,27 @@
 package ru.rpw.radio
 
-import android.app.PendingIntent
 import android.content.Context
-import android.content.Intent
 import android.media.MediaPlayer
 import android.net.wifi.WifiManager
 import android.os.PowerManager
 import android.util.Log
 import android.view.View
 import android.widget.ProgressBar
-import android.widget.Toast
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import kotlinx.android.synthetic.main.fragment_home.view.*
 
+
 object SingletonMediaPlayer : MediaPlayer.OnPreparedListener, MediaPlayer.OnInfoListener,
-    MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener ,
-    MediaPlayer.OnCompletionListener {
+    MediaPlayer.OnErrorListener, MediaPlayer.OnBufferingUpdateListener,
+    MediaPlayer.OnCompletionListener{
     private var stream = "https://myradio24.org/zuek1917"
     var root: View? = null
     private val mMedia: MediaPlayer = MediaPlayer()
     var state = StatePlayer.NOTREADY
     var kbps = 0
+    val mediaSessionToken = null
 
     init {
+
         initMediaPlayer()
     }
 
@@ -34,6 +32,7 @@ object SingletonMediaPlayer : MediaPlayer.OnPreparedListener, MediaPlayer.OnInfo
         mMedia.setOnInfoListener(this)
         mMedia.setOnPreparedListener(this)
         mMedia.prepareAsync()
+        MediaPlaybackService()
     }
 
     fun prepareAsync() {
@@ -42,7 +41,7 @@ object SingletonMediaPlayer : MediaPlayer.OnPreparedListener, MediaPlayer.OnInfo
 
     }
 
-  private  fun setWakeMode(context: Context, lock: Boolean) {
+    private fun setWakeMode(context: Context, lock: Boolean) {
         val wm = context.applicationContext.getSystemService(Context.WIFI_SERVICE) as WifiManager
         val wifiLock = wm.createWifiLock(WifiManager.WIFI_MODE_FULL_HIGH_PERF, "MyWifiLock")
 
@@ -66,6 +65,7 @@ object SingletonMediaPlayer : MediaPlayer.OnPreparedListener, MediaPlayer.OnInfo
         state = StatePlayer.STOP
         mMedia.prepareAsync()
         viewButtonMediaPlayer()
+        //root?.let{ ControlPanelMediaPlayer(it.context,this)}
     }
 
     fun playPauseMediaPlayer() {
@@ -85,41 +85,9 @@ object SingletonMediaPlayer : MediaPlayer.OnPreparedListener, MediaPlayer.OnInfo
             else -> {
             }
         }
-
         viewButtonMediaPlayer()
         setAirRecText("pos:" + mMedia.currentPosition + " dur:" + mMedia.duration)
-    }
-
-
-    fun updateNotification() {
-        val mNotification = NotificationCompat.Builder(root!!.context, "MM")
-        mNotification.mActions.clear()
-        when (state) {
-            StatePlayer.PLAY -> {
-                mNotification
-                    .addAction(R.drawable.ic_pause_button, "Pause", getPending(1))
-                    .addAction(R.drawable.ic_stop_button, "Stop", getPending(2))
-            }
-            StatePlayer.PAUSE -> {
-                mNotification
-                    .addAction(R.drawable.ic_play_button, "Play", getPending(1))
-                    .addAction(R.drawable.ic_stop_button, "Stop", getPending(2))
-            }
-        }
-    }
-
-    private fun getPending(value: Int): PendingIntent {
-        val intent = Intent(root!!.context, Receiver::class.java).apply {
-            when (value) {
-                1 -> {
-                    action = "redRadio.intent.action.PLAY"
-                }
-                2 -> {
-                    action = "redRadio.intent.action.STOP"
-                }
-            }
-        }
-        return PendingIntent.getBroadcast(root!!.context, 0, intent, 0)
+        //root?.let{ ControlPanelMediaPlayer(it.context,this)}
     }
 
     enum class StatePlayer {
@@ -181,15 +149,17 @@ object SingletonMediaPlayer : MediaPlayer.OnPreparedListener, MediaPlayer.OnInfo
         viewButtonMediaPlayer()
         setWakeMode(root!!.context, true)
 
-
-
-        Log.d("PLAYER", "onPrepared: done pos:" + mMedia.currentPosition + " dur:" + mMedia.duration)
+        Log.d(
+            "PLAYER",
+            "onPrepared: done pos:" + mMedia.currentPosition + " dur:" + mMedia.duration  +" info:" + mp!!.trackInfo
+        )
+        root?.let{ ControlPanelMediaPlayer(it.context,this)}
 
     }
 
     override fun onInfo(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
         Log.d("PLAYER", "onInfo: what:$what, extra:$extra")
-        if (what==703) kbps = extra
+        if (what == 703) kbps = extra
         return true
     }
 
@@ -205,5 +175,7 @@ object SingletonMediaPlayer : MediaPlayer.OnPreparedListener, MediaPlayer.OnInfo
     override fun onCompletion(mp: MediaPlayer?) {
         Log.d("PLAYER", "onCompletion: done")
     }
+
+
 
 }

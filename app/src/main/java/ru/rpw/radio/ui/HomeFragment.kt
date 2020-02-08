@@ -1,6 +1,6 @@
 package ru.rpw.radio.ui
 
-import android.annotation.SuppressLint
+
 import android.content.res.Configuration
 import android.graphics.drawable.Drawable
 import android.os.Bundle
@@ -42,7 +42,6 @@ open class HomeFragment : Fragment()   {
         changeOrientation(root, mModelMedia.state)
         initControlMediaPlayer(root, mModelMedia)
         initUpdateNameOfTrack(1000)
-
 
         return root
     }
@@ -159,7 +158,8 @@ open class HomeFragment : Fragment()   {
     private fun setNameOfTrack(text: String) {
         this.view?.trackInfo?.let {
             if (text != it.text) {
-                it.text = "$text (${SingletonMediaPlayer.kbps} kbps)"
+                val textForName = if (SingletonMediaPlayer.kbps == 0) text else "$text (${SingletonMediaPlayer.kbps} kbps)"
+                it.text = textForName
                 it.isSelected = true
             }
         }

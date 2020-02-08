@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
         checkManifestPermission()
-        ControlPanelMediaPlayer(applicationContext)
+
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
